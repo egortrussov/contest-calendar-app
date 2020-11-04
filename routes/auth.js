@@ -3,6 +3,8 @@ const express = require('express');
 const User = require('../models/User');
 
 const { getToken } = require('./authMiddleware/tokens');
+const { hashPassword, comparePasswords } = require('./authMiddleware/passwords');
+const { json } = require('express');
 
 const router = express.Router();
 
@@ -13,7 +15,7 @@ const router = express.Router();
 */
 
 router.post('/register', (req, res) => {
-    const {
+    let {
         email,
         password,
         fullName,
@@ -50,6 +52,8 @@ router.post('/register', (req, res) => {
                     })
                 return;
             }
+
+            password = hashPassword(password);
             
             let newUser = new User({
                 email,
@@ -74,6 +78,51 @@ router.post('/register', (req, res) => {
                         })
                 })
         }) 
+})
+
+router.post('/login', (req, res) => {
+    let { email, password } = req.body;
+
+    let errors = [];
+
+    User 
+        .findOne({ email: email })
+        .then(foundUser => {
+            if (!foundUser) {
+                errors.push('User with such email not found')
+                res 
+                    .status(403)
+                    .json({
+                        success: false,
+                        errors
+                    })
+                return;
+            }
+
+            console.log(foundUser.password, password)
+
+            let doPasswordsMatch = comparePasswords(foundUser.password, password);
+
+            if (!doPasswordsMatch) {
+                errors.push('Incorrect password!')
+                res 
+                    .status(403)
+                    .json({
+                        success: false,
+                        errors
+                    })
+            } else {
+                let token = getToken(foundUser._id);
+
+                res 
+                    .status(200)
+                    .json({
+                        success: true,
+                        user: foundUser,
+                        token
+                    })
+            }
+        })
 })
 
 module.exports = router;
