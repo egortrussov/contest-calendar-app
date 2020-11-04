@@ -2,10 +2,17 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
+const cors = require('cors');
+
+const authRoutes = require('./routes/auth')
 
 const app = express();
 
 dotenv.config();
+
+app.use(express.json());
+
+app.use(cors());
 
 mongoose.connect(process.env.DB_URL_DEVELOPMENT, {
     useNewUrlParser: true,
@@ -20,6 +27,8 @@ mongoose.connect(process.env.DB_URL_DEVELOPMENT, {
 //     schema,
 //     graphiql: true
 // }))
+
+app.use('/api/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || 5000;
 
