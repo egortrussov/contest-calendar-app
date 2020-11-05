@@ -16,6 +16,11 @@ const UserSchema = new Schema({
     featuredContests: {
         type: [String],
         default: []
+    },
+    isAdmin: {
+        type: Boolean,
+        required: false,
+        default: false
     }
 })
 

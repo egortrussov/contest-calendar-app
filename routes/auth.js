@@ -1,10 +1,10 @@
 const express = require('express');
 
 const User = require('../models/User');
+const Organisation = require('../models/Organisation');
 
 const { getToken } = require('./authMiddleware/tokens');
 const { hashPassword, comparePasswords } = require('./authMiddleware/passwords');
-const { json } = require('express');
 
 const router = express.Router();
 
@@ -21,7 +21,8 @@ router.post('/register', (req, res) => {
         fullName,
         organisation,
         isTeacher,
-        grade
+        grade,
+        isAdmin
     } = req.body;
 
     let errors = [];
@@ -61,20 +62,30 @@ router.post('/register', (req, res) => {
                 fullName,
                 organisation,
                 isTeacher,
-                grade
+                grade,
+                isAdmin
             })
 
             newUser 
                 .save()
                 .then(savedUser => {
-                    let token = getToken(savedUser._id);
+                    let token = getToken(savedUser._id, savedUser.isTeacher, savedUser.isAdmin);
 
-                    res 
-                        .status(200)
-                        .json({
-                            success: true,
-                            user: savedUser,
-                            token
+                    Organisation 
+                        .findOne({ _id: organisation })
+                        .then(foundOrganisation => {
+                            foundOrganisation.members.push(savedUser._id);
+
+                            foundOrganisation
+                                .save();
+
+                            res 
+                                .status(200)
+                                .json({
+                                    success: true,
+                                    user: savedUser,
+                                    token
+                                })
                         })
                 })
         }) 
@@ -112,7 +123,7 @@ router.post('/login', (req, res) => {
                         errors
                     })
             } else {
-                let token = getToken(foundUser._id);
+                let token = getToken(foundUser._id, foundUser.isTeacher, foundUser.isAdmin);
 
                 res 
                     .status(200)
