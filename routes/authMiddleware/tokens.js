@@ -5,7 +5,7 @@ function getToken(userId, isTeacher, isAdmin) {
         userId,
         isTeacher,
         isAdmin
-    }, 'supersecret', {
+    }, process.env.JWT_SECRET, {
         expiresIn: 60 * 60 * 24 * 3
     })
 
