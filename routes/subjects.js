@@ -5,14 +5,7 @@ const Subject = require('../models/Subject');
 
 const router = express.Router();
 
-router.post('/test', adminAuth, (req, res) => {
-    res 
-        .json({
-            ok: true
-        })
-})
-
-router.post('/createSubject', (req, res) => {
+router.post('/createSubject', adminAuth, (req, res) => {
     const { name } = req.body;
 
     let newSubject = new Subject({

@@ -29,6 +29,7 @@ mongoose.connect(process.env.DB_URL_DEVELOPMENT, {
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/organisation', require('./routes/organisations'));
 app.use('/api/subject', require('./routes/subjects'));
+app.use('/api/contest', require('./routes/contests'));
 
 const PORT = process.env.PORT || 5000;
 

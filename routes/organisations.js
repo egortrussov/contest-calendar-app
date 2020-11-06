@@ -1,10 +1,11 @@
 const express = require('express');
+const { adminAuth } = require('../middleware/auth');
 
 const Organisation = require('../models/Organisation');
 
 const router = express.Router();
 
-router.post('/createOrganisation', (req, res) => {
+router.post('/createOrganisation', adminAuth, (req, res) => {
     const { name } = req.body;
 
     let newOrganisation = new Organisation({

@@ -8,12 +8,6 @@ const { hashPassword, comparePasswords } = require('./authMiddleware/passwords')
 
 const router = express.Router();
 
-/*
-
-    Register user 
-
-*/
-
 router.post('/register', (req, res) => {
     let {
         email,
