@@ -4,6 +4,8 @@ const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const cors = require('cors');
 
+const schema = require('./schema/schema');
+
 const app = express();
 
 dotenv.config();
@@ -21,10 +23,10 @@ mongoose.connect(process.env.DB_URL_DEVELOPMENT, {
     console.log('Successfully connected to database')
 })
 
-// app.use('/graphql', graphqlHTTP({
-//     schema,
-//     graphiql: true
-// }))
+app.use('/graphql', graphqlHTTP({
+    schema,
+    graphiql: true
+}))
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/organisation', require('./routes/organisations'));
