@@ -1,4 +1,5 @@
 const graphql = require('graphql');
+const Contest = require('../../models/Contest');
 
 const { GraphQLObjectType, 
         GraphQLID, 
@@ -11,8 +12,17 @@ const { GraphQLObjectType,
 const SubjectType = new GraphQLObjectType({
     name: 'Subject',
     fields: () =>  ({
-       name: { type: GraphQLString }
+       name: { type: GraphQLString },
+       contests: {
+           type: new GraphQLList(ContestType),
+           resolve(parent, args) {
+               return Contest 
+                        .find({ subject: parent._id })
+           }
+       }
     })
 })
 
 module.exports = SubjectType;
+
+const ContestType = require('./ContestType')
