@@ -25,6 +25,13 @@ const UserType = new GraphQLObjectType({
                 return Organisation 
                     .findOne({ _id: parent.organisation });
             }
+        },
+        featuredContests: {
+            type: new GraphQLList(ContestType),
+            resolve(parent, args) {
+                return Contest.
+                        find({ _id: { $in: parent.featuredContests } })
+            }
         }
     })
 })
@@ -32,3 +39,6 @@ const UserType = new GraphQLObjectType({
 module.exports = UserType;
 
 const OrganisationType = require('./OrganisationType');
+const ContestType = require('./ContestType');
+const Contest = require('../../models/Contest');const { find } = require('../../models/Organisation');
+
