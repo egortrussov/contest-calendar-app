@@ -40,5 +40,5 @@ module.exports = UserType;
 
 const OrganisationType = require('./OrganisationType');
 const ContestType = require('./ContestType');
-const Contest = require('../../models/Contest');const { find } = require('../../models/Organisation');
+const Contest = require('../../models/Contest');
 

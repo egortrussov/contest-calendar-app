@@ -1,0 +1,23 @@
+html {
+  --primary-color: #f05454;
+  --bg-color: #4ADB71;
+  --dark-color: #42C465;
+  --dark-color-lighten: rgb(77, 209, 112);
+  --dark-primary-color: #42C465;
+  --main-bg-color: #fff;
+  --main-text-color: #000;
+  --danger-color: #fc393e;
+  --bg-color-accent: #353535;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+/*# sourceMappingURL=globalStyles.css.map */
