@@ -1,9 +1,9 @@
 html {
     --primary-color: #f05454;
-    --bg-color: #4ADB71;
-    --dark-color: #42C465;
-    --dark-color-lighten: rgb(77, 209, 112);
-    --dark-primary-color: #42C465;
+    --bg-color: #f05454;
+    --dark-color: #d84343;
+    --dark-color-lighten: #e74f4f;
+    --dark-primary-color: #e74f4f;
     --main-bg-color: #fff;
     --main-text-color: #000;
     --danger-color: #fc393e;
@@ -18,4 +18,8 @@ html {
 
 body {
     font-family: 'Nunito', sans-serif;
+}
+
+a {
+    text-decoration: none !important;
 }

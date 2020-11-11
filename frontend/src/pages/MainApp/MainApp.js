@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 
 import Navbar from '../../components/Navbar/Navbar'
 
+import './css/MainApp.css'
+
 export default class MainApp extends Component {
+
     render() {
         return (
-            <div>
+            <div className="app-container">
                 <Navbar />
-                Main app
+                <main>
+                    Main app
+                </main>
             </div>
         )
     }
