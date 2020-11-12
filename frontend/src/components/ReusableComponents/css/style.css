@@ -81,4 +81,55 @@
 .input-group input:focus + label {
   width: 100%;
 }
+
+.dropdown {
+  width: 100%;
+  max-width: 400px;
+  cursor: pointer;
+  margin-top: .5rem;
+  position: relative;
+}
+
+.dropdown .selected {
+  padding: .6rem;
+  border: 3px solid var(--primary-color);
+  border-radius: 1rem;
+  font-weight: bold;
+}
+
+.dropdown .collapse {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  -webkit-transform-origin: 50% 0%;
+          transform-origin: 50% 0%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.dropdown .collapse.open {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.dropdown .collapse .item {
+  border: .5px solid silver;
+  padding: .6rem;
+}
+
+.dropdown .collapse .item:hover {
+  background-color: #fff5f5;
+}
+
+.dropdown .collapse .item:first-child {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.dropdown .collapse .item:last-child {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
 /*# sourceMappingURL=style.css.map */
