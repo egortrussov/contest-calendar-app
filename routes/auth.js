@@ -124,7 +124,8 @@ router.post('/login', (req, res) => {
                     .json({
                         success: true,
                         user: foundUser,
-                        token
+                        token,
+                        expiration: 3
                     })
             }
         })

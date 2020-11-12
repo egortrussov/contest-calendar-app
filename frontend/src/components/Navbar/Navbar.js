@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import ls from 'local-storage'
+import Cookies from 'js-cookie'
 
 import { init } from './navbarScript'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faAlignLeft, faPenAlt, faSignInAlt, faSignOutAlt, faUserPlus, faChevronLeft, faCat, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faAlignLeft, faPenAlt, faSignInAlt, faSignOutAlt, faUserPlus, faChevronLeft, faCat, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 class Navbar extends Component {
     state = {
@@ -28,12 +29,12 @@ class Navbar extends Component {
     render() {
         const { isHiiden } = this.state;
 
-        const token = ls.get('token');
-        console.log(token);
-        
-        let isLoggedIn = token !== '';
+        const token = Cookies.get('token');
+        console.log(token)
 
-        let rnd = Math.floor(Math.random() * 100) % 3;
+        let isLoggedIn = true;
+        if (!token || token === '' )
+            isLoggedIn = false;
 
         return (
             <nav>
@@ -42,28 +43,18 @@ class Navbar extends Component {
                 </div>
                 <div className="nav-item nav-top">
                     <a href="/">
-                        {
-                            rnd === 0 ? (
-                                <>
-                                    <h2 className="logo"><FontAwesomeIcon className="cat-icon" icon={ faCat } /><span className="text">EasyTest</span></h2>
-                                </>
-                            ) : (
-                                <>
-                                    <h2 className="logo"> 
-                                        <FontAwesomeIcon icon={ faCalendarAlt } className="icon" />
-                                        <span className="text">EasyTest</span>
-                                    </h2>
-                                </>
-                            )
-                        }
+                        <h2 className="logo"> 
+                            <FontAwesomeIcon icon={ faCalendarAlt } className="icon" />
+                            <span className="text">EasyCalendar</span>
+                        </h2>
                     </a>
                 </div>
                 { 
                     isLoggedIn && (
                         <div className="nav-item nav-middle">
-                            <NavLink exact className="nav-link" to={"/app/"}><FontAwesomeIcon className="icon" icon={ faHome } /> <span className="text">Home</span></NavLink>
-                            <NavLink className="nav-link" to={"/app/allTests"}><FontAwesomeIcon className="icon" icon={ faAlignLeft } /><span className="text"> Tests</span></NavLink>
-                            <NavLink className="nav-link" to={"/app/createTest"}><FontAwesomeIcon className="icon" icon={ faPenAlt } /> <span className="text">Create Test</span></NavLink>
+                            <NavLink exact className="nav-link" to={"/app/"}><FontAwesomeIcon className="icon" icon={ faHome } /> <span className="text">Overview</span></NavLink>
+                            <NavLink className="nav-link" to={"/app/allTests"}><FontAwesomeIcon className="icon" icon={ faAlignLeft } /><span className="text">Browse subjects</span></NavLink>
+                            <NavLink className="nav-link" to={"/app/createTest"}><FontAwesomeIcon className="icon" icon={ faPlus } /> <span className="text">Add contest</span></NavLink>
                         </div>
                     )
                 }

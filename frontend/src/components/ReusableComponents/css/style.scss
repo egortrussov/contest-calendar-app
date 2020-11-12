@@ -1,0 +1,80 @@
+.heading {
+    font-weight: 800;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    padding-top: 0;
+
+    &.md {
+        font-size: 2rem;
+    }
+
+    &.sm {
+        font-size: 1.7rem;
+    }
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1rem;
+
+    .label {
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    &.mini {
+        max-width: 250px;
+    }
+
+    input {
+        background: none !important;
+        border: none;
+        border-bottom: 3px solid #ddd;
+        width: 100%;
+        max-width: 400px;
+        color: var(--main-text-color);
+        padding: .3rem;
+        font-size: 1.1rem;
+
+        &:focus {
+            outline: none;
+        }
+
+        &.mini {
+            max-width: 250px;
+            border-bottom-width: 2px;
+        }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active  {
+        box-shadow: none !important;
+        background: none !important;
+        background-color: transparent !important;
+        -webkit-box-shadow: 0 0 0 30px var(--main-bg-color) inset !important;
+        -webkit-text-fill-color: var(--main-text-color) !important;
+    }
+
+    label {
+        position: absolute;
+        width: 0px;
+        height: 3px;
+        background-color: var(--primary-color);
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        transition: all .25s ease;
+    }
+
+    input.mini + label {
+        height: 2px;
+    }
+
+    input:focus + label {
+        width: 100%;
+    }
+}

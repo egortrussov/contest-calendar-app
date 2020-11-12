@@ -138,7 +138,7 @@
   display: block;
 }
 
-.app-container nav .nav-item .logo .cat-icon {
+.app-container nav .nav-item .logo .cat-icon, .app-container nav .nav-item .logo .icon {
   width: 30px;
   height: 30px;
   margin-right: .6rem;
