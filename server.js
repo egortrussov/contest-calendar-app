@@ -33,6 +33,10 @@ app.use('/api/organisation', require('./routes/organisations'));
 app.use('/api/subject', require('./routes/subjects'));
 app.use('/api/contest', require('./routes/contests'));
 
+app.get('/check', (req, res) => {
+    res.json({ ok: true })
+})
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, (err) => {

@@ -55,6 +55,20 @@ const RootQuery = new GraphQLObjectType({
                 return Contest 
                         .findOne({ _id: args._id })
             }
+        },
+        organisations: {
+            type: new graphql.GraphQLList(OrganisationType),
+            resolve(parent, args) {
+                return Organisation 
+                        .find()
+            }
+        },
+        subjects: {
+            type: new graphql.GraphQLList(SubjectType),
+            resolve(parent, args) {
+                return Subject 
+                        .find()
+            }
         }
     })
 })

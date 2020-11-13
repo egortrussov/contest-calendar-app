@@ -7,6 +7,15 @@ import Input from '../../../../components/ReusableComponents/InputField'
 
 import '../css/style.css'
 
+async function test() {
+    return fetch('http://localhost:5000/check')
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                return res
+            })
+}
+
 export default class Register extends Component {
 
     state = {
@@ -19,6 +28,12 @@ export default class Register extends Component {
         gradesList: [10, 2, 1, 5, 8, 11, 9, 3, 4, 6, 7],
         secretCode: ''
     }
+
+    async componentDidMount() {
+        test()
+            .then(res => console.log(res))
+    }
+    
 
     setCredential(e) {
         const name = e.target.name;

@@ -125,6 +125,7 @@
         transform: scale(0);
         max-height: 200px;
         overflow-y: scroll;
+        z-index: 100;
 
         &.open {
             transform: scale(1)
@@ -133,6 +134,7 @@
         .item {
             border: .5px solid silver;
             padding: .6rem;
+            background-color: #fff;
 
             &:hover {
                 background-color: #fff5f5;
