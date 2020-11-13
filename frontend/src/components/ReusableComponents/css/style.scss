@@ -150,3 +150,36 @@
         }
     }
 }
+
+.button {
+    height: 50px;
+    padding: 0 1.7rem;
+    min-width: 140px;
+    border: 3px solid var(--primary-color);
+    border-radius: .5rem;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+
+    &.cta {
+        background-color: var(--primary-color);
+        color: #fff !important;
+    }
+
+    &.disabled {
+        opacity: .7;
+    }
+
+    span {
+        // text-transform: lowercase;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    &:hover {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
+    }
+}

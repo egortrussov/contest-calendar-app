@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Button from '../../../../components/ReusableComponents/Button';
 import Dropdown from '../../../../components/ReusableComponents/Dropdown';
 
 import Heading from '../../../../components/ReusableComponents/Heading'
@@ -107,6 +108,15 @@ export default class Register extends Component {
 
                         )
                     }
+
+                    <div className="input-group">
+                        <Button
+                            text="Register"
+                            isLoading={ true }
+                            onClick={ () => alert('clicked') }
+                            type="cta"
+                        />
+                    </div>
                 </form>
 
             </div>
