@@ -87,10 +87,33 @@
     position: relative;
 
     .selected {
+        position: relative;
         padding: .6rem;
         border: 3px solid var(--primary-color);
         border-radius: 1rem;
         font-weight: bold;
+
+        .arrow {
+            position: absolute;
+            left: auto;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+
+            .icon {
+                font-size: 14px;
+                color: var(--primary-color);
+                transform: rotate(0);
+                transition: transform .3s;
+            }
+        }
+
+        &.open {
+
+            .icon {
+                transform: rotate(180deg);
+            }
+        }
     }
 
     .collapse {
@@ -100,6 +123,8 @@
         transition: all .2s;
         transform-origin: 50% 0%;
         transform: scale(0);
+        max-height: 200px;
+        overflow-y: scroll;
 
         &.open {
             transform: scale(1)

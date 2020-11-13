@@ -4,6 +4,8 @@ import Dropdown from '../../../../components/ReusableComponents/Dropdown';
 import Heading from '../../../../components/ReusableComponents/Heading'
 import Input from '../../../../components/ReusableComponents/InputField'
 
+import '../css/style.css'
+
 export default class Register extends Component {
 
     state = {
@@ -11,7 +13,10 @@ export default class Register extends Component {
         email: '',
         password: '',
         confirmPassword: '',
+        isTeacher: false,
         errors: [],
+        gradesList: [10, 2, 1, 5, 8, 11, 9, 3, 4, 6, 7],
+        secretCode: ''
     }
 
     setCredential(e) {
@@ -23,15 +28,23 @@ export default class Register extends Component {
         })
     }
 
-    setGrade(option) {
+    setGrade(index) {
+        const { gradesList } = this.state;
+
         this.setState({
-            grade: option
+            grade: gradesList[index]
+        })
+    }
+
+    setTeacherState() {
+        this.setState({
+            isTeacher: !this.state.isTeacher
         })
     }
 
     render() {
 
-        const { errors, grade } = this.state;
+        const { errors, grade, isTeacher, gradesList } = this.state;
 
         return (
             <div>
@@ -60,16 +73,40 @@ export default class Register extends Component {
                         onChange={ (e) => this.setCredential(e) }
                     />
                     <div className="input-group">
-                        <div className="label">
-                            Grade: 
+                        <div className="label checkbox-container">
+                            <span>
+                                Register as teacher 
+                            </span>
+                            <input type="checkbox" onChange={ () => this.setTeacherState() } />
                         </div>
-                        <Dropdown
-                            options={ [1, 2, 3] }
-                            placeholder="Select grade"
-                            currentOption={ grade }
-                            onSelect={ (grade) => this.setGrade(grade) }
-                        />
                     </div>
+                    {
+                        isTeacher ? (
+                            <>
+                            <Input
+                                type="text"
+                                name="secretCode"
+                                label="Secret code (get from school admin)"
+                                onChange={ (e) => this.setCredential(e) }
+                            />
+                            </>
+                        ) : (
+                            <>
+                                <div className="input-group">
+                                    <div className="label">
+                                        Grade: 
+                                    </div>
+                                    <Dropdown
+                                        options={ gradesList }
+                                        placeholder="Select grade"
+                                        currentOption={ grade }
+                                        onSelect={ (grade) => this.setGrade(grade) }
+                                    />
+                                </div>
+                            </>
+
+                        )
+                    }
                 </form>
 
             </div>
