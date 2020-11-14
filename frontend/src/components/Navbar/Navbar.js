@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import ls from 'local-storage'
+import { NavLink } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 import { init } from './navbarScript'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faAlignLeft, faPenAlt, faSignInAlt, faSignOutAlt, faUserPlus, faChevronLeft, faCat, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faAlignLeft, faSignInAlt, faSignOutAlt, faUserPlus, faChevronLeft, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 class Navbar extends Component {
     state = {
@@ -27,7 +26,6 @@ class Navbar extends Component {
     }
 
     render() {
-        const { isHiiden } = this.state;
 
         const token = Cookies.get('token');
         console.log(token)

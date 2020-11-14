@@ -4,6 +4,9 @@ import Dropdown from '../../../../components/ReusableComponents/Dropdown';
 
 import Heading from '../../../../components/ReusableComponents/Heading'
 import Input from '../../../../components/ReusableComponents/InputField'
+import Spinner from '../../../../components/ReusableComponents/Spinner';
+
+import { fetchQuery } from '../../../../dataFetching/GraphQLQuery';
 
 import '../css/style.css'
 
@@ -26,12 +29,29 @@ export default class Register extends Component {
         isTeacher: false,
         errors: [],
         gradesList: [10, 2, 1, 5, 8, 11, 9, 3, 4, 6, 7],
-        secretCode: ''
+        secretCode: '',
+        organisation: '',
+        organisations: null,
+        chosenOrganisationName: null,
+        isLoading: true
     }
 
     async componentDidMount() {
-        test()
-            .then(res => console.log(res))
+        let query = `
+            query {
+                organisations {
+                    _id,
+                    name
+                }
+            }
+        `;
+
+        let organisations = await fetchQuery(query);
+
+        this.setState({
+            isLoading: false,
+            organisations: organisations.data.organisations
+        })
     }
     
 
@@ -58,9 +78,27 @@ export default class Register extends Component {
         })
     }
 
+    setOrganisation(index) {
+        const { organisations } = this.state;
+
+        this.setState({
+            organisation: organisations[index]._id,
+            chosenOrganisationName: organisations[index].name
+        })
+    }
+
     render() {
 
-        const { errors, grade, isTeacher, gradesList } = this.state;
+        const { errors, grade, isTeacher, gradesList, isLoading, organisations, chosenOrganisationName } = this.state;
+
+        if (isLoading) return (
+            <Spinner 
+                size="lg"
+            />
+        )
+
+        let organisationNames = [];
+        organisations.forEach(curr => organisationNames.push(curr.name));
 
         return (
             <div>
@@ -88,6 +126,17 @@ export default class Register extends Component {
                         label="Confirm password"
                         onChange={ (e) => this.setCredential(e) }
                     />
+                    <div className="input-group">
+                        <div className="label">
+                            Organisation
+                        </div>
+                        <Dropdown
+                            options={ organisationNames }
+                            placeholder="Select organisations"
+                            currentOption={ chosenOrganisationName }
+                            onSelect={ (organisationIndex) => this.setOrganisation(organisationIndex) }
+                        />
+                    </div>
                     <div className="input-group">
                         <div className="label checkbox-container">
                             <span>
@@ -127,7 +176,7 @@ export default class Register extends Component {
                     <div className="input-group">
                         <Button
                             text="Register"
-                            isLoading={ true }
+                            isLoading={ false }
                             onClick={ () => alert('clicked') }
                             type="cta"
                         />

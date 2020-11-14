@@ -23,7 +23,7 @@ mongoose.connect(process.env.DB_URL_DEVELOPMENT, {
     console.log('Successfully connected to database')
 })
 
-app.use('/graphql', graphqlHTTP({
+app.use('/api/graphql', graphqlHTTP({
     schema,
     graphiql: true
 }))
