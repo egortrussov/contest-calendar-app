@@ -31,9 +31,10 @@ export default class Register extends Component {
         gradesList: [10, 2, 1, 5, 8, 11, 9, 3, 4, 6, 7],
         secretCode: '',
         organisation: '',
-        organisations: null,
-        chosenOrganisationName: null,
-        isLoading: true
+        organisations: '',
+        chosenOrganisationName: '',
+        isLoading: true,
+        isSubmitted: false
     }
 
     async componentDidMount() {
@@ -87,9 +88,59 @@ export default class Register extends Component {
         })
     }
 
+    register(e) {
+        e.preventDefault();
+
+        this.setState({
+            isSubmitted: true
+        })
+
+        let formEl = e.target;
+
+        let formData = new FormData(formEl); 
+
+        let {
+            email,
+            password,
+            confirmPassword,
+            fullName,
+            organisation,
+            isTeacher,
+            grade,
+            secretCode
+        } = this.state;
+
+        let creds = {
+            email,
+            password,
+            fullName,
+            organisation,
+        }
+
+        let errors = [];
+        if (!creds.email.length) errors['email'] = 'U must enter a email';
+        if (!creds.fullName.length) errors['fullName'] = 'U must enter ur name';
+        if (!creds.organisation) errors['organisation'] = 'Choose an organisation';
+        if (!creds.password || creds.password.length < 8) errors['password'] = 'Passsword must be at least 8 characters long';
+        if (confirmPassword !== creds.password) errors['confirmPassword'] = 'Passwords do not match';
+
+        // const { isTeacher, grade, secretCode } = this.state;
+
+        if (!isTeacher && !grade) errors['grade'] = 'Select ur grade'; 
+
+        if (errors['fullName'] || errors['email'] || errors['grade'] || errors['organisation'] || errors['password'] || errors['confirmPassword'] ) {
+            console.log(errors)
+            this.setState({
+                isSubmitted: false,
+                errors
+            })
+            return;
+        }
+    }
+
     render() {
 
-        const { errors, grade, isTeacher, gradesList, isLoading, organisations, chosenOrganisationName } = this.state;
+        const { errors, grade, isTeacher, gradesList, isLoading, organisations, chosenOrganisationName, isSubmitted } = this.state;
 
         if (isLoading) return (
             <Spinner 
@@ -107,7 +158,7 @@ export default class Register extends Component {
                     type="lg"
                 />
 
-                <form>
+                <form onSubmit={ (e) => this.register(e) }>
                     <Input
                         type="email"
                         name="email"
@@ -124,6 +175,12 @@ export default class Register extends Component {
                         type="password"
                         name="confirmPassword"
                         label="Confirm password"
+                        onChange={ (e) => this.setCredential(e) }
+                    />
+                    <Input
+                        type="text"
+                        name="fullName"
+                        label="Full name"
                         onChange={ (e) => this.setCredential(e) }
                     />
                     <div className="input-group">
@@ -176,8 +233,8 @@ export default class Register extends Component {
                     <div className="input-group">
                         <Button
                             text="Register"
-                            isLoading={ false }
-                            onClick={ () => alert('clicked') }
+                            isLoading={ isSubmitted }
+                            
                             type="cta"
                         />
                     </div>
