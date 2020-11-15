@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
+
 import Button from '../../../../components/ReusableComponents/Button';
 import Dropdown from '../../../../components/ReusableComponents/Dropdown';
-
 import Heading from '../../../../components/ReusableComponents/Heading'
 import Input from '../../../../components/ReusableComponents/InputField'
 import Spinner from '../../../../components/ReusableComponents/Spinner';
+import { AuthContext } from '../../../../Context/AuthContext';
 
 import { fetchQuery } from '../../../../dataFetching/GraphQLQuery';
 
 import '../css/style.css'
-
-async function test() {
-    return fetch('http://localhost:5000/check')
-            .then(res => res.json())
-            .then(res => {
-                console.log(res)
-                return res
-            })
-}
 
 export default class Register extends Component {
 
@@ -37,7 +29,10 @@ export default class Register extends Component {
         isSubmitted: false
     }
 
+    static contextType = AuthContext;
+
     async componentDidMount() {
+        console.log(this.context)
         let query = `
             query {
                 organisations {
@@ -123,9 +118,6 @@ export default class Register extends Component {
         if (!creds.organisation) errors['organisation'] = 'Choose an organisation';
         if (!creds.password || creds.password.length < 8) errors['password'] = 'Passsword must be at least 8 characters long';
         if (confirmPassword !== creds.password) errors['confirmPassword'] = 'Passwords do not match';
-
-        // const { isTeacher, grade, secretCode } = this.state;
-
         if (!isTeacher && !grade) errors['grade'] = 'Select ur grade'; 
 
         if (errors['fullName'] || errors['email'] || errors['grade'] || errors['organisation'] || errors['password'] || errors['confirmPassword'] ) {
@@ -136,6 +128,25 @@ export default class Register extends Component {
             })
             return;
         }
+
+        creds = {
+            ...creds,
+            isTeacher,
+            grade,
+            secretCode
+        };
+
+        fetch(`${ this.context.proxy }/api/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(creds)
+        }) 
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+            })
     }
 
     render() {
