@@ -116,6 +116,7 @@ router.post('/login', (req, res) => {
                     .status(403)
                     .json({
                         success: false,
+                        isEmailError: true,
                         errors
                     })
                 return;
@@ -131,6 +132,7 @@ router.post('/login', (req, res) => {
                     .status(403)
                     .json({
                         success: false,
+                        isPasswordError: true,
                         errors
                     })
             } else {
