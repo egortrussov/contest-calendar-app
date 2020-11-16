@@ -17,7 +17,7 @@
     position: relative;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 1rem;
+    margin-bottom: calc(1rem + 13px);
 
     .label {
         font-size: 1.3rem;
@@ -76,6 +76,15 @@
 
     input:focus + label {
         width: 100%;
+    }
+
+    .error-msg {
+        position: absolute;
+        height: 13px;
+        font-size: 13px;
+        color: var(--danger-color);
+        bottom: 0;
+        transform: translateY(100%);
     }
 }
 

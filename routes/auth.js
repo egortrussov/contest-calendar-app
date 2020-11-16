@@ -16,7 +16,8 @@ router.post('/register', (req, res) => {
         organisation,
         isTeacher,
         grade,
-        isAdmin
+        isAdmin,
+        secretCode,
     } = req.body;
 
     let errors = [];
@@ -33,16 +34,32 @@ router.post('/register', (req, res) => {
             })
         return;
     }
+
+    if (isTeacher) {
+        console.log(secretCode !==  process.env.TEACHER_SECRET_CODE)
+        if (secretCode !== process.env.TEACHER_SECRET_CODE) {
+            errors['secretCode'] = 'Invalid secret code';
+            res 
+                .status(403)
+                .json({
+                    success: false,
+                    isCodeError: true,
+                    errors
+                })
+            return;
+        }
+    }
     
     User
         .findOne({ email: email })
         .then(foundUser => {
             if (foundUser) {
-                errors.push('User with such email exists');
+                errors['email'] = 'User with such email exists';
                 res
                     .status(403)
                     .json({
                         success: false,
+                        isEmailError: true,
                         errors
                     })
                 return;
@@ -94,7 +111,7 @@ router.post('/login', (req, res) => {
         .findOne({ email: email })
         .then(foundUser => {
             if (!foundUser) {
-                errors.push('User with such email not found')
+                errors['email'] = 'User with such email not found';
                 res 
                     .status(403)
                     .json({
@@ -109,7 +126,7 @@ router.post('/login', (req, res) => {
             let doPasswordsMatch = comparePasswords(foundUser.password, password);
 
             if (!doPasswordsMatch) {
-                errors.push('Incorrect password!')
+                errors['password'] = 'Incorrect password';
                 res 
                     .status(403)
                     .json({

@@ -8,16 +8,18 @@ export const AuthContext = createContext();
 class AuthContextProvider extends Component {
     state = {
         token: Cookies.get('token'),
+        user: null,
         proxy: getProxy()
     }
 
-    login(token, expiration) {
+    login(token, expiration, user) {
         Cookies.set('token', token, {
             expires: expiration
         })
 
         this.setState({
-            token: token
+            token: token,
+            user: user
         })
     }
 
@@ -35,8 +37,8 @@ class AuthContextProvider extends Component {
             <AuthContext.Provider
                 value={{
                     ...this.state,
-                    login: this.login,
-                    logout: this.logout
+                    login: (token, expiration, user) =>  this.login(token, expiration, user),
+                    logout: () => this.logout()
                 }}
             >
                 { this.props.children }

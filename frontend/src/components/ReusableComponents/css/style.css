@@ -17,7 +17,7 @@
   position: relative;
   width: 100%;
   max-width: 400px;
-  margin-bottom: 1rem;
+  margin-bottom: calc(1rem + 13px);
 }
 
 .input-group .label {
@@ -80,6 +80,16 @@
 
 .input-group input:focus + label {
   width: 100%;
+}
+
+.input-group .error-msg {
+  position: absolute;
+  height: 13px;
+  font-size: 13px;
+  color: var(--danger-color);
+  bottom: 0;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
 }
 
 .dropdown {

@@ -146,6 +146,24 @@ export default class Register extends Component {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
+
+                if (!res.success) {
+                    let { errors } = res;
+
+                    if (res.isCodeError) errors['secretCode'] = 'Invalid secret code';
+                    if (res.isEmailError) errors['email'] = 'User with such email exists';
+
+                    this.setState({
+                        isSubmitted: false,
+                        errors
+                    })
+
+                    return;
+                }
+                
+                this.context.login(res.token, res.expiration, res.user);
+
+                window.location.href = '/app/'
             })
     }
 
@@ -175,24 +193,28 @@ export default class Register extends Component {
                         name="email"
                         label="E-mail"
                         onChange={ (e) => this.setCredential(e) }
+                        errorMsg={ errors['email'] }
                     />
                     <Input
                         type="password"
                         name="password"
                         label="Password"
                         onChange={ (e) => this.setCredential(e) }
+                        errorMsg={ errors['password'] }
                     />
                     <Input
                         type="password"
                         name="confirmPassword"
                         label="Confirm password"
                         onChange={ (e) => this.setCredential(e) }
+                        errorMsg={ errors['confirmPassword'] }
                     />
                     <Input
                         type="text"
                         name="fullName"
                         label="Full name"
                         onChange={ (e) => this.setCredential(e) }
+                        errorMsg={ errors['fullName'] }
                     />
                     <div className="input-group">
                         <div className="label">
@@ -204,6 +226,9 @@ export default class Register extends Component {
                             currentOption={ chosenOrganisationName }
                             onSelect={ (organisationIndex) => this.setOrganisation(organisationIndex) }
                         />
+                        <div className="error-msg">
+                            { errors['organisation'] }
+                        </div>
                     </div>
                     <div className="input-group">
                         <div className="label checkbox-container">
@@ -221,6 +246,7 @@ export default class Register extends Component {
                                 name="secretCode"
                                 label="Secret code (get from school admin)"
                                 onChange={ (e) => this.setCredential(e) }
+                                errorMsg={ errors['secretCode'] }
                             />
                             </>
                         ) : (
@@ -235,6 +261,9 @@ export default class Register extends Component {
                                         currentOption={ grade }
                                         onSelect={ (grade) => this.setGrade(grade) }
                                     />
+                                    <div className="error-msg">
+                                        { errors['grade'] }
+                                    </div>
                                 </div>
                             </>
 

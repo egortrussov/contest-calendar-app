@@ -7,6 +7,8 @@ import { init } from './navbarScript'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faAlignLeft, faSignInAlt, faSignOutAlt, faUserPlus, faChevronLeft, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 
+import { AuthContext } from '../../Context/AuthContext'
+
 class Navbar extends Component {
     state = {
         isLoggedIn: false,
@@ -18,7 +20,7 @@ class Navbar extends Component {
     }
     
 
-    // static contextType = AuthContext;
+    static contextType = AuthContext;
 
     logout() {
         this.context.logout();
