@@ -1,3 +1,3 @@
 module.exports = {
-    url: 'http://localhost:5000'
+    graphQLUrl: 'http://localhost:5000'
 }

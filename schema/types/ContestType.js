@@ -21,6 +21,7 @@ const DateType = new GraphQLObjectType({
 const ContestType = new GraphQLObjectType({
     name: 'Contest',
     fields: () =>  ({
+       _id: { type: GraphQLID },
        name: { type: GraphQLString },
        description: { type: GraphQLString },
        date: { type: DateType },

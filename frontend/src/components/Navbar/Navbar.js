@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 import { init } from './navbarScript'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faAlignLeft, faSignInAlt, faSignOutAlt, faUserPlus, faChevronLeft, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faAlignLeft, faSignInAlt, faSignOutAlt, faUserPlus, faChevronLeft, faCalendarAlt, faPlus, faLaptop, faCalendarTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { AuthContext } from '../../Context/AuthContext'
 
@@ -29,11 +29,14 @@ class Navbar extends Component {
 
     render() {
 
-        const token = Cookies.get('token');
-        console.log(token)
+        // const token = Cookies.get('token');
+
+        const { user, token } = this.context;
+
+        console.log(user)
 
         let isLoggedIn = true;
-        if (!token || token === '' )
+        if (!token || token === '' || !user)
             isLoggedIn = false;
 
         return (
@@ -52,9 +55,25 @@ class Navbar extends Component {
                 { 
                     isLoggedIn && (
                         <div className="nav-item nav-middle">
-                            <NavLink exact className="nav-link" to={"/app/"}><FontAwesomeIcon className="icon" icon={ faHome } /> <span className="text">Overview</span></NavLink>
-                            <NavLink className="nav-link" to={"/app/allTests"}><FontAwesomeIcon className="icon" icon={ faAlignLeft } /><span className="text">Browse subjects</span></NavLink>
-                            <NavLink className="nav-link" to={"/app/createTest"}><FontAwesomeIcon className="icon" icon={ faPlus } /> <span className="text">Add contest</span></NavLink>
+
+                            <NavLink exact className="nav-link" to={"/app/profile"}><FontAwesomeIcon className="icon" icon={ faHome } /> <span className="text">Profile</span></NavLink>
+
+                            <NavLink exact className="nav-link" to={"/app/"}><FontAwesomeIcon className="icon" icon={ faCalendarTimes } /> <span className="text">Calendar</span></NavLink>
+
+                            <NavLink className="nav-link" to={"/app/subjects"}><FontAwesomeIcon className="icon" icon={ faAlignLeft } /><span className="text">Browse subjects</span></NavLink>
+
+                            {
+                                (user.isTeacher || user.isAdmin) ? (
+                                    <NavLink className="nav-link" to={"/app/createContest"}><FontAwesomeIcon className="icon" icon={ faPlus } /> <span className="text">Add contest</span></NavLink>
+                                ) : <></>
+                            }
+
+                            {
+                                (user.isTeacher) ? (
+                                    <NavLink className="nav-link" to={"/app/admin"}><FontAwesomeIcon className="icon" icon={ faLaptop } /> <span className="text">Admin panel</span></NavLink>
+                                ) : <></>
+                            }
+
                         </div>
                     )
                 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import AuthContextProvider from '../../Context/AuthContext'
+import AuthContextProvider, { AuthContext } from '../../Context/AuthContext'
 
 import Navbar from '../../components/Navbar/Navbar'
 import Login from './Auth/Login/Login'
@@ -11,7 +11,13 @@ import './css/MainApp.css'
 
 export default class MainApp extends Component {
 
+    state = {
+        
+    }
     render() {
+
+        console.log(this.context)
+
         return (
             <AuthContextProvider>
                 <div className="app-container">

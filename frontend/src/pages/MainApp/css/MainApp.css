@@ -70,6 +70,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   cursor: pointer;
+  color: #fff !important;
 }
 
 @media (max-width: 650px) {
