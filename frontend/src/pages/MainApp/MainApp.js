@@ -8,16 +8,11 @@ import Login from './Auth/Login/Login'
 import Register from './Auth/Register/Register'
 
 import './css/MainApp.css'
+import Profile from './Profile/Profile'
 
 export default class MainApp extends Component {
 
-    state = {
-        
-    }
     render() {
-
-        console.log(this.context)
-
         return (
             <AuthContextProvider>
                 <div className="app-container">
@@ -26,6 +21,7 @@ export default class MainApp extends Component {
                         <Switch>
                             <Route path="/app/register" component={ Register } />
                             <Route path="/app/login" component={ Login } />
+                            <Route path="/app/profile" component={ Profile } />
                         </Switch>
                     </main>
                 </div>

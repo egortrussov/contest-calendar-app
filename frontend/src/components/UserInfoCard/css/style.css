@@ -1,0 +1,43 @@
+.user-info-card {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.user-info-card .block {
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.user-info-card .block .block-name {
+  width: 140px;
+  font-weight: 800;
+}
+
+.user-info-card .block .block-content {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.user-info-card .block .block-content::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background-color: #a0a0a0;
+  left: 0;
+}
+
+.user-info-card .block:nth-last-child(2) {
+  background-color: #fff;
+}
+/*# sourceMappingURL=style.css.map */
