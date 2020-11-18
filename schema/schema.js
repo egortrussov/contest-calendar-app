@@ -4,6 +4,7 @@ const UserType = require('./types/UserType')
 const OrganisationType = require('./types/OrganisationType')
 const SubjectType = require('./types/SubjectType');
 const ContestType = require('./types/ContestType');
+const DateType = require('./types/DateType');
 
 const User = require('../models/User');
 const Organisation = require('../models/Organisation');
@@ -11,7 +12,10 @@ const Subject = require('../models/Subject');
 const Contest = require('../models/Contest');
 
 const { GraphQLObjectType,
-        GraphQLID } = graphql;
+        GraphQLID,
+        GraphQLList,
+        GraphQLString,
+        GraphQLInt } = graphql;
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -56,8 +60,60 @@ const RootQuery = new GraphQLObjectType({
                         .findOne({ _id: args._id })
             }
         },
+        contests: {
+            type: new GraphQLList(ContestType),
+            args: {
+                searchType: {
+                    type: graphql.GraphQLString,
+                    defaultValue: null
+                },
+                subject: {
+                    type: graphql.GraphQLID,
+                    defaultValue: null
+                },
+                day: {
+                    type: GraphQLInt,
+                    defaultValue: null
+                },
+                month: {
+                    type: GraphQLInt,
+                    defaultValue: null
+                },
+                year: {
+                    type: GraphQLInt,
+                    defaultValue: null
+                }
+            },
+            resolve(parent, args) {
+                const { searchType } = args;
+
+                if (searchType === 'subject') 
+                    return Contest 
+                                .find({ subject: args.subject })
+                
+                if (searchType === 'day') 
+                    return Contest 
+                                .find({ 
+                                    date: { 
+                                        day: args.day,
+                                        month: args.month,
+                                        year: args.year
+                                    } 
+                                })
+                
+                if (searchType === 'month') 
+                    return Contest 
+                                .find({ 
+                                    'date.month': args.month,
+                                    'date.year': args.year
+                                    
+                                })
+
+                return Contest.find()
+            }
+        },
         organisations: {
-            type: new graphql.GraphQLList(OrganisationType),
+            type: new GraphQLList(OrganisationType),
             resolve(parent, args) {
                 return Organisation 
                         .find()

@@ -12,6 +12,7 @@ const { GraphQLObjectType,
 const SubjectType = new GraphQLObjectType({
     name: 'Subject',
     fields: () =>  ({
+       _id: { type: GraphQLID },
        name: { type: GraphQLString },
        contests: {
            type: new GraphQLList(ContestType),

@@ -1,6 +1,9 @@
 const graphql = require('graphql');
+
 const Subject = require('../../models/Subject');
 const User = require('../../models/User');
+
+const DateType = require('./DateType')
 
 const { GraphQLObjectType, 
         GraphQLID, 
@@ -8,15 +11,6 @@ const { GraphQLObjectType,
         GraphQLString,
         GraphQLBoolean,
         GraphQLList } = graphql;
-
-const DateType = new GraphQLObjectType({
-    name: 'Date',
-    fields: () => ({
-        day: { type: GraphQLInt },
-        month: { type: GraphQLInt },
-        year: { type: GraphQLInt }
-    })
-})
 
 const ContestType = new GraphQLObjectType({
     name: 'Contest',
