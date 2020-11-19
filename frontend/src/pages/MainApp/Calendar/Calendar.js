@@ -29,7 +29,33 @@ export default class Calendar extends Component {
 
         this.setState({
             currentDate
+        }, () => {
+            this.calculateMonthDays()
         })
+    }
+
+    calculateMonthDays() {
+        const { currentDate } = this.state;
+
+        let monthsData = [];
+
+        for (let m = 0; m < 12; m++) {
+            let date = new Date(currentDate.year, m, 0).getDate();
+            let startsOn = new Date(currentDate.year, m, 1).getDay();
+            startsOn--;
+            if (startsOn < 0) startsOn = 6;
+
+            monthsData.push({
+                days: date,
+                missedDays: startsOn
+            })
+
+            console.log(date, startsOn)
+        }
+
+        this.setState({
+            monthsData
+        }, () => console.log(this.state.monthsData))
     }
 
     changeYear(val) {
