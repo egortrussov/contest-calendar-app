@@ -65,11 +65,19 @@
             }
         }
 
+        // .text {
+        //     opacity: 1;
+        // }
+
         &.hidden {
             width: 70px;
 
             @include tablet-xsm {
                 width: 100% !important;
+            }
+
+            .text {
+                opacity: 0 !important;
             }
         }
 
@@ -112,6 +120,7 @@
                 }
 
                 .text {
+                    opacity: 1;
 
                     &.hidden {
                         transition: all .2s;
@@ -152,9 +161,11 @@
                     }
                     
                     white-space: nowrap;
+                    // opacity: 1;
+                    transition: all .2s;
 
                     &.hidden {
-                        transition: all .2s;
+                        
                         opacity: 0;
                     }
                 }

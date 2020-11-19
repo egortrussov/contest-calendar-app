@@ -102,6 +102,10 @@
   }
 }
 
+.app-container nav.hidden .text {
+  opacity: 0 !important;
+}
+
 @media (max-width: 650px) {
   .app-container nav .nav-item {
     display: -webkit-box;
@@ -152,6 +156,10 @@
   margin-left: .3rem;
 }
 
+.app-container nav .nav-item .logo .text {
+  opacity: 1;
+}
+
 .app-container nav .nav-item .logo .text.hidden {
   -webkit-transition: all .2s;
   transition: all .2s;
@@ -186,6 +194,8 @@
 
 .app-container nav .nav-item .nav-link .text {
   white-space: nowrap;
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 @media (max-width: 650px) {
@@ -195,8 +205,6 @@
 }
 
 .app-container nav .nav-item .nav-link .text.hidden {
-  -webkit-transition: all .2s;
-  transition: all .2s;
   opacity: 0;
 }
 

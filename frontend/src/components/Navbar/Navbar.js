@@ -12,7 +12,8 @@ import { AuthContext } from '../../Context/AuthContext'
 class Navbar extends Component {
     state = {
         isLoggedIn: false,
-        isHidden: false
+        isHidden: false,
+        hasBeenInitialised: false
     }
 
     componentDidMount() {
@@ -38,6 +39,11 @@ class Navbar extends Component {
         let isLoggedIn = true;
         if (!token || token === '' || !user)
             isLoggedIn = false;
+        
+        // if (user) {
+        //     init();
+        // }
+        
 
         return (
             <nav>
