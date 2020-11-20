@@ -25,18 +25,28 @@ export default class CalendarComponent extends Component {
     render() {
 
         const { monthNames } = this.state;
-        let { monthsData } = this.props;
+        let { monthsData, currentDate, todaysDate } = this.props;
 
         return (
             <div className="calendar">
                 {
-                    monthsData.map((monthData, inx) => (
-                        <MonthCard
-                            monthData={ monthData }
-                            monthName={ monthNames[inx] }
-                            month={ inx }
-                        />
-                    ))
+                    monthsData.map((monthData, inx) =>{
+                        let isCurrent = false;
+
+                        if (currentDate.year === todaysDate.year && todaysDate.month === inx) 
+                            isCurrent = true;
+
+                        return (
+                            <MonthCard
+                                monthData={ monthData }
+                                monthName={ monthNames[inx] }
+                                monthInx={ inx }
+                                isCurrent={ isCurrent }
+                                todaysDate={ todaysDate }
+                                currentDate={ currentDate }
+                            />
+                        )
+                    } )
                 }
             </div>
         )

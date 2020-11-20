@@ -13,6 +13,11 @@ import './css/style.css'
 export default class Calendar extends Component {
 
     state = {
+        todaysDate: {
+            day: null,
+            month: null,
+            year: null
+        },
         currentDate: {
             day: null,
             month: null,
@@ -31,7 +36,8 @@ export default class Calendar extends Component {
         }
 
         this.setState({
-            currentDate
+            currentDate,
+            todaysDate: currentDate
         }, () => {
             this.calculateMonthDays()
         })
@@ -77,7 +83,7 @@ export default class Calendar extends Component {
 
     render() {
 
-        const { currentDate, monthsData } = this.state;
+        const { currentDate, monthsData, todaysDate } = this.state;
 
         return (
             <>
@@ -108,6 +114,8 @@ export default class Calendar extends Component {
                 </div>
                 <CalendarComponent
                     monthsData={ monthsData }
+                    todaysDate={ todaysDate }
+                    currentDate={ currentDate }
                 />
             </>
         )

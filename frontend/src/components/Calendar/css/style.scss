@@ -30,6 +30,14 @@
             font-weight: bold;
         }
 
+        &.active {
+            
+            .top {
+                background-color: var(--primary-color);
+                color: #fff;
+            }
+        }
+
         .bottom {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -53,6 +61,11 @@
 
                 &.disabled {
                     background-color: rgb(235, 235, 235);
+                }
+
+                &.active {
+                    background-color: var(--primary-color) !important;
+                    color: #fff !important;
                 }
             }
         }

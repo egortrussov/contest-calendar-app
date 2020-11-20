@@ -47,6 +47,11 @@
   font-weight: bold;
 }
 
+.calendar .month-card.active .top {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
 .calendar .month-card .bottom {
   display: -ms-grid;
   display: grid;
@@ -81,5 +86,10 @@
 
 .calendar .month-card .bottom .day-node.disabled {
   background-color: #ebebeb;
+}
+
+.calendar .month-card .bottom .day-node.active {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
 }
 /*# sourceMappingURL=style.css.map */
