@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import Heading from '../../../components/ReusableComponents/Heading'
+import CalendarComponent from '../../../components/Calendar/CalendarComponent'
+
 import { formatDate } from '../../../middleware/dateFromat';
 
 import './css/style.css'
@@ -15,7 +17,8 @@ export default class Calendar extends Component {
             day: null,
             month: null,
             year: null
-        }
+        },
+        monthsData: null
     }
 
     componentDidMount() {
@@ -49,13 +52,11 @@ export default class Calendar extends Component {
                 days: date,
                 missedDays: startsOn
             })
-
-            console.log(date, startsOn)
         }
 
         this.setState({
             monthsData
-        }, () => console.log(this.state.monthsData))
+        })
     }
 
     changeYear(val) {
@@ -68,14 +69,14 @@ export default class Calendar extends Component {
             currentDate.year = year;
             this.setState({
                 currentDate
-            })
+            }, () => this.calculateMonthDays())
         }
     }
     
 
     render() {
 
-        const { currentDate } = this.state;
+        const { currentDate, monthsData } = this.state;
 
         return (
             <>
@@ -104,6 +105,9 @@ export default class Calendar extends Component {
                         </div>
                     </div>
                 </div>
+                <CalendarComponent
+                    monthsData={ monthsData }
+                />
             </>
         )
     }

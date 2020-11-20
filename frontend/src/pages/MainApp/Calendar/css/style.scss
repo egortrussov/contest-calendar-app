@@ -1,0 +1,36 @@
+.date-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    background-color: #f0f0f0;
+    border-radius: 1rem;
+    padding-right: 1rem;
+
+    .left {
+
+        p {
+            font-size: 1.3rem;
+            color: #777777;
+            font-weight: 800;
+        }
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+
+        .switch-button {
+            padding: .5rem .8rem;
+            background-color: #d4d4d4;
+            font-size: 1.3rem;
+            border-radius: .3rem;
+        }
+
+        .text {
+            font-size: 1.7rem;
+            font-weight: 900;
+            margin: 0 1.3rem;
+        }
+    }
+}

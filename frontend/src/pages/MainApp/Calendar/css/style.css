@@ -1,1 +1,44 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+.date-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1rem 1rem;
+  background-color: #f0f0f0;
+  border-radius: 1rem;
+  padding-right: 1rem;
+}
+
+.date-info .left p {
+  font-size: 1.3rem;
+  color: #777777;
+  font-weight: 800;
+}
+
+.date-info .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.date-info .right .switch-button {
+  padding: .5rem .8rem;
+  background-color: #d4d4d4;
+  font-size: 1.3rem;
+  border-radius: .3rem;
+}
+
+.date-info .right .text {
+  font-size: 1.7rem;
+  font-weight: 900;
+  margin: 0 1.3rem;
+}
+/*# sourceMappingURL=style.css.map */
