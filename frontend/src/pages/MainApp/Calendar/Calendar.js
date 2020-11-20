@@ -18,7 +18,7 @@ export default class Calendar extends Component {
             month: null,
             year: null
         },
-        monthsData: null
+        monthsData: []
     }
 
     componentDidMount() {
@@ -43,7 +43,7 @@ export default class Calendar extends Component {
         let monthsData = [];
 
         for (let m = 0; m < 12; m++) {
-            let date = new Date(currentDate.year, m, 0).getDate();
+            let date = new Date(currentDate.year, m + 1, 0).getDate();
             let startsOn = new Date(currentDate.year, m, 1).getDay();
             startsOn--;
             if (startsOn < 0) startsOn = 6;
@@ -53,6 +53,7 @@ export default class Calendar extends Component {
                 missedDays: startsOn
             })
         }
+        console.log(monthsData)
 
         this.setState({
             monthsData
