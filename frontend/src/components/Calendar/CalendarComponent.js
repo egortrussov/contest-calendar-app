@@ -33,7 +33,7 @@ export default class CalendarComponent extends Component {
                     monthsData.map((monthData, inx) =>{
                         let isCurrent = false;
 
-                        if (currentDate.year === todaysDate.year && todaysDate.month === inx) 
+                        if (currentDate.year === todaysDate.year && todaysDate.month === inx + 1) 
                             isCurrent = true;
 
                         return (

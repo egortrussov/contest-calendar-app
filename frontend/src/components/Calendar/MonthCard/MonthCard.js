@@ -36,20 +36,26 @@ export default class MonthCard extends Component {
                     state="disabled"
                 />
             ))
-
+        
+        console.log(todaysDate)
         for (let i = 0; i < monthData.days; i++) {
             let isActive = false;
-            if (monthInx === 9)
+            let isChosen = false;
+            // if (monthInx === 9)
             // console.log(todaysDate.month - 1,  monthInx,  todaysDate.day === i + 1)
 
-            if (currentDate.year === todaysDate.year && todaysDate.month === monthInx && todaysDate.day === i + 1) 
+            if (currentDate.year === todaysDate.year && todaysDate.month === monthInx + 1 && todaysDate.day === i + 1) 
                 isActive = true;
+            
+            if (currentDate.month === monthInx + 1 && currentDate.day === i + 1) 
+                isChosen = true;
 
             days.push((
                 <DayNode
                     day={ (i + 1).toString() }
                     state=""
                     isCurrent={ isActive }
+                    isChosen={ isChosen }
                     setCurrentDate={ () => this.changeDate(i + 1) }
                 />
             ))

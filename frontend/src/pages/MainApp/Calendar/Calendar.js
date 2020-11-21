@@ -51,7 +51,7 @@ export default class Calendar extends Component {
 
         let currentDate = {
             day: date.getDate(),
-            month: date.getMonth(),
+            month: date.getMonth() + 1,
             year: date.getFullYear()
         }
 
@@ -130,7 +130,7 @@ export default class Calendar extends Component {
         }
 
         return (
-            <>
+            <div className="calendar-page">
                 <Heading
                     text="Overview"
                 />
@@ -163,7 +163,7 @@ export default class Calendar extends Component {
                     setCurrentDate={ (date) => this.setCurrentDate(date) }
                     setSearchType={ (type) => this.setSearchType(type) }
                 />
-            </>
+            </div>
         )
     }
 }
