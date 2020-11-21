@@ -8,7 +8,7 @@ export default class DayNode extends Component {
         let isActive = isCurrent ? 'active' : ''
 
         return (
-            <div className={ `day-node ${ state } ${ isActive }` }>
+            <div className={ `day-node ${ state } ${ isActive }` } onClick={ () => this.props.setCurrentDate() }>
                 { day }
             </div>
         )

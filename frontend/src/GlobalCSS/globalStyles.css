@@ -24,4 +24,8 @@ body {
 a {
   text-decoration: none !important;
 }
+
+html {
+  overflow-x: hidden;
+}
 /*# sourceMappingURL=globalStyles.css.map */

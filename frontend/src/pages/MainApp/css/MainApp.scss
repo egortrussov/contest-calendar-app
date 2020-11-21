@@ -16,8 +16,16 @@
     nav {
         @include tablet-xsm {
             flex-direction: row;
+            justify-content: space-between;
             width: 100%;
             height: auto;
+
+            .nav-top {
+
+                .text {
+                    display: none !important;
+                }
+            }
         }
 
         display: flex;

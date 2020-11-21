@@ -44,6 +44,8 @@ export default class CalendarComponent extends Component {
                                 isCurrent={ isCurrent }
                                 todaysDate={ todaysDate }
                                 currentDate={ currentDate }
+                                setCurrentDate={ (date) => this.props.setCurrentDate(date) }
+                                setSearchType={ (type) => this.setSearchType(type) }
                             />
                         )
                     } )

@@ -34,15 +34,11 @@ class Navbar extends Component {
 
         const { user, token } = this.context;
 
-        console.log(user)
+        console.log({ user, token })
 
         let isLoggedIn = true;
         if (!token || token === '' || !user)
             isLoggedIn = false;
-        
-        // if (user) {
-        //     init();
-        // }
         
 
         return (

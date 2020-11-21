@@ -16,6 +16,7 @@ class AuthContextProvider extends Component {
 
     async componentDidMount() {
         const { userId, token, user } = this.state;
+        
 
         if (!token) return;
 

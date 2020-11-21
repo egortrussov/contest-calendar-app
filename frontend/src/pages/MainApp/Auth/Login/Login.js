@@ -19,12 +19,12 @@ export default class Login extends Component {
 
     static contextType = AuthContext;
 
-    componentDidMount() {
-        if (this.context.token) 
-            this.setState({
-                isRedirect: true
-            })
-    }
+    // componentDidMount() {
+    //     if (this.context.token) 
+    //         this.setState({
+    //             isRedirect: true
+    //         })
+    // }
     
 
     setCredential(e) {
@@ -84,7 +84,9 @@ export default class Login extends Component {
     render() {
         const { errors, isRedirect, isSubmitted } = this.state;
 
-        if (isRedirect) return (
+        console.log(this.context)
+
+        if (this.context.token) return (
             <Redirect
                 to="/app/"
             />

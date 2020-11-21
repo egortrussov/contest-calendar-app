@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import Heading from '../../../components/ReusableComponents/Heading'
 import CalendarComponent from '../../../components/Calendar/CalendarComponent'
+
+import { AuthContext } from '../../../Context/AuthContext'
 
 import { formatDate } from '../../../middleware/dateFromat';
 
@@ -23,10 +26,27 @@ export default class Calendar extends Component {
             month: null,
             year: null
         },
-        monthsData: []
+        monthsData: [],
+        isRedirectToLogin: false,
+        searchType: null
     }
 
+    static contextType = AuthContext;
+
+    checkAuth() {
+        if (!this.context.token) {
+            this.setState({
+                isRedirectToLogin: true
+            })
+            return;
+        }
+    }
+    
+
     componentDidMount() {
+
+        // this.checkAuth()
+
         let date = new Date();
 
         let currentDate = {
@@ -79,11 +99,35 @@ export default class Calendar extends Component {
             }, () => this.calculateMonthDays())
         }
     }
-    
+
+    setCurrentDate(date) {
+        console.log(date)
+        this.setState({
+            currentDate: date
+        })
+    }
+
+    setSearchType(type) {
+        this.setState({
+            searchType: type
+        })
+    }
 
     render() {
 
-        const { currentDate, monthsData, todaysDate } = this.state;
+        const { currentDate, monthsData, todaysDate, isRedirectToLogin } = this.state;
+
+        if (!this.context.token) {
+            this.context.logout();
+            return (
+                <>
+                    <Redirect 
+                        to="/app/login"
+                    />
+                </>
+            )
+
+        }
 
         return (
             <>
@@ -116,6 +160,8 @@ export default class Calendar extends Component {
                     monthsData={ monthsData }
                     todaysDate={ todaysDate }
                     currentDate={ currentDate }
+                    setCurrentDate={ (date) => this.setCurrentDate(date) }
+                    setSearchType={ (type) => this.setSearchType(type) }
                 />
             </>
         )
