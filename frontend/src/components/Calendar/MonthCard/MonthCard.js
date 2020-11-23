@@ -11,6 +11,7 @@ export default class MonthCard extends Component {
             month: this.props.monthInx + 1,
             year
         })
+        this.props.setSearchType('month');
     }
 
     changeDate(day) {
@@ -21,6 +22,8 @@ export default class MonthCard extends Component {
             month: this.props.monthInx + 1,
             year
         })
+
+        this.props.setSearchType('day')
     }
 
     render() {
@@ -37,7 +40,6 @@ export default class MonthCard extends Component {
                 />
             ))
         
-        console.log(todaysDate)
         for (let i = 0; i < monthData.days; i++) {
             let isActive = false;
             let isChosen = false;

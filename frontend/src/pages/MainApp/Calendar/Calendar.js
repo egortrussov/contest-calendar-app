@@ -12,6 +12,8 @@ import { AuthContext } from '../../../Context/AuthContext'
 import { formatDate } from '../../../middleware/dateFromat';
 
 import './css/style.css'
+import ContestsDisplayModal from '../../../components/ContestsDisplayModal/ContestsDisplayModal';
+import { fetchQuery } from '../../../dataFetching/GraphQLQuery';
 
 export default class Calendar extends Component {
 
@@ -28,7 +30,10 @@ export default class Calendar extends Component {
         },
         monthsData: [],
         isRedirectToLogin: false,
-        searchType: null
+        searchType: null,
+        isContestsPageShown: false,
+        contestsToDisplay: [],
+        isContestsPageLoading: false
     }
 
     static contextType = AuthContext;
@@ -101,9 +106,10 @@ export default class Calendar extends Component {
     }
 
     setCurrentDate(date) {
-        console.log(date)
         this.setState({
             currentDate: date
+        }, () => {
+            this.setModalState(true)
         })
     }
 
@@ -113,9 +119,53 @@ export default class Calendar extends Component {
         })
     }
 
+    setModalState(state) {
+        this.setState({
+            isContestsPageShown: state,
+            isContestsPageLoading: true
+        }, () => this.getContests())
+    }
+
+    async getContests() {
+        const { currentDate, searchType } = this.state;
+
+        console.log({currentDate, searchType})
+
+        let contestsData = await fetchQuery(`
+            query {
+                contests(searchType: "${ searchType }", day: ${ currentDate.day }, month: ${ currentDate.month }, year: ${ currentDate.year }) {
+                    _id,
+                    name,
+                    description,
+                    website,
+                    date {
+                        day,
+                        month,
+                        year
+                    },
+                    subject {
+                        _id,
+                        name
+                    },
+                    createdBy {
+                        fullName,
+                        organisation {
+                            name
+                        }
+                    }
+                }
+            }
+        `)
+
+        this.setState({
+            contestsToDisplay: contestsData.data.contests,
+            isContestsPageLoading: false
+        })
+    }
+
     render() {
 
-        const { currentDate, monthsData, todaysDate, isRedirectToLogin } = this.state;
+        const { currentDate, monthsData, todaysDate, isContestsPageShown } = this.state;
 
         if (!this.context.token) {
             this.context.logout();
@@ -130,7 +180,7 @@ export default class Calendar extends Component {
         }
 
         return (
-            <div className="calendar-page">
+            <div className={ `calendar-page ${ isContestsPageShown ? 'has-pb' : '' }` }>
                 <Heading
                     text="Overview"
                 />
@@ -163,6 +213,13 @@ export default class Calendar extends Component {
                     setCurrentDate={ (date) => this.setCurrentDate(date) }
                     setSearchType={ (type) => this.setSearchType(type) }
                 />
+                {
+                    isContestsPageShown && (
+                        <ContestsDisplayModal
+
+                        />
+                    )
+                }
             </div>
         )
     }
