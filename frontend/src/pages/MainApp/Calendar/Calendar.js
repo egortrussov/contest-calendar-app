@@ -31,7 +31,7 @@ export default class Calendar extends Component {
         monthsData: [],
         isRedirectToLogin: false,
         searchType: null,
-        isContestsPageShown: false,
+        isContestsPageShown: true,
         contestsToDisplay: [],
         isContestsPageLoading: false
     }
@@ -126,6 +126,13 @@ export default class Calendar extends Component {
         }, () => this.getContests())
     }
 
+    closeModal() {
+        this.setState({
+            isContestsPageShown: false,
+            isContestsPageLoading: false
+        })
+    }
+
     async getContests() {
         const { currentDate, searchType } = this.state;
 
@@ -213,13 +220,10 @@ export default class Calendar extends Component {
                     setCurrentDate={ (date) => this.setCurrentDate(date) }
                     setSearchType={ (type) => this.setSearchType(type) }
                 />
-                {
-                    isContestsPageShown && (
-                        <ContestsDisplayModal
-
-                        />
-                    )
-                }
+                <ContestsDisplayModal
+                    isHidden={ !isContestsPageShown }
+                    closeModal={ () => this.closeModal() }
+                />
             </div>
         )
     }
