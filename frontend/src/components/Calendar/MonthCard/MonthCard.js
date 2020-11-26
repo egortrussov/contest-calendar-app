@@ -7,7 +7,7 @@ export default class MonthCard extends Component {
         const { day, month, year } = this.props.currentDate;
 
         this.props.setCurrentDate({
-            day,
+            day: null,
             month: this.props.monthInx + 1,
             year
         })

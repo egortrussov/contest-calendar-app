@@ -129,7 +129,8 @@ export default class Calendar extends Component {
     closeModal() {
         this.setState({
             isContestsPageShown: false,
-            isContestsPageLoading: false
+            isContestsPageLoading: false,
+            contestsToDisplay: []
         })
     }
 
@@ -145,6 +146,7 @@ export default class Calendar extends Component {
                     name,
                     description,
                     website,
+                    grade,
                     date {
                         day,
                         month,
@@ -172,7 +174,7 @@ export default class Calendar extends Component {
 
     render() {
 
-        const { currentDate, monthsData, todaysDate, isContestsPageShown } = this.state;
+        const { currentDate, monthsData, todaysDate, isContestsPageShown, isContestsPageLoading } = this.state;
 
         if (!this.context.token) {
             this.context.logout();
@@ -194,7 +196,7 @@ export default class Calendar extends Component {
                 <div className="date-info">
                     <div className="left">
                         <p className="curret-date">
-                            { formatDate(currentDate) }
+                            { formatDate(todaysDate) }
                         </p>
                     </div>
                     <div className="right">
@@ -223,6 +225,8 @@ export default class Calendar extends Component {
                 <ContestsDisplayModal
                     isHidden={ !isContestsPageShown }
                     closeModal={ () => this.closeModal() }
+                    date={ currentDate }
+                    isLoading={ isContestsPageLoading }
                 />
             </div>
         )

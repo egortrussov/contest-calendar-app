@@ -5,6 +5,12 @@ import './css/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+import Heading from '../ReusableComponents/Heading';
+import Spinner from '../ReusableComponents/Spinner';
+
+import { formatDate } from '../../middleware/dateFromat';
+import ContestsTable from '../ContestsTable/ContestsTable';
+
 export default class ContestsDisplayModal extends Component {
 
     state = {
@@ -21,7 +27,7 @@ export default class ContestsDisplayModal extends Component {
 
         const { isExtended } = this.state;
 
-        const { isHidden } = this.props;
+        const { isHidden, date, isLoading } = this.props;
 
         return (
             <div className={ `display-modal ${ isExtended ? 'extended' : '' } ${ isHidden ? 'hidden' : '' }` }>
@@ -43,7 +49,23 @@ export default class ContestsDisplayModal extends Component {
                         </div>
                     </div>
                 </div>
-                rf
+                <Heading
+                    type="sm"
+                    text={ 'Contests for ' + formatDate(date) }
+                />
+
+                {
+                    isLoading ? (
+                        <Spinner 
+                            size="md"
+                        />
+                    ) : (
+                        <ContestsTable
+                            type="full"
+                        />
+                    )
+                }
+
             </div>
         )
     }

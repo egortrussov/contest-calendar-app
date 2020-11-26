@@ -21,6 +21,9 @@ const formatDate = (data) => {
 
     let { day, month, year } = data;
 
+    if (day == null) 
+        return monthNames[month - 1] + ', ' + year;
+
     return day + ' ' + monthNames[month - 1] + ', ' + year;
 };
 
