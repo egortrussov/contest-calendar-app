@@ -1,0 +1,61 @@
+.contests-table {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    // min-width: 1000px;
+    overflow-x: scroll;
+    padding-bottom: 50px;
+
+    .row {
+        display: flex;
+        width: auto;
+
+        .cell {
+            min-width: 200px;
+            min-width: 180px;
+            padding: 1rem;
+            position: relative;
+            font-size: .9rem;
+
+            &.small {
+                width: 80px !important;
+                min-width: 80px !important;
+            }
+
+            &::before, &::after {
+                position: absolute;
+                content: '';
+                background-color: #c5c5c5;
+            }
+
+            &::before {
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                height: 1.5px;
+                width: 90%;
+            }
+
+            &::after {
+                left: auto;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 1.5px;
+                height: 80%;
+            }
+        }
+
+        &.head {
+            
+            .cell {
+                font-weight: bold;
+                text-align: center;
+                background-color: #dbdbdb;
+                font-size: 1rem;
+            }
+        }
+    }
+
+
+}

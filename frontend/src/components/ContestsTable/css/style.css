@@ -1,1 +1,65 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+.contests-table {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: auto;
+  overflow-x: scroll;
+  padding-bottom: 50px;
+}
+
+.contests-table .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: auto;
+}
+
+.contests-table .row .cell {
+  min-width: 200px;
+  min-width: 180px;
+  padding: 1rem;
+  position: relative;
+  font-size: .9rem;
+}
+
+.contests-table .row .cell.small {
+  width: 80px !important;
+  min-width: 80px !important;
+}
+
+.contests-table .row .cell::before, .contests-table .row .cell::after {
+  position: absolute;
+  content: '';
+  background-color: #c5c5c5;
+}
+
+.contests-table .row .cell::before {
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  height: 1.5px;
+  width: 90%;
+}
+
+.contests-table .row .cell::after {
+  left: auto;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 1.5px;
+  height: 80%;
+}
+
+.contests-table .row.head .cell {
+  font-weight: bold;
+  text-align: center;
+  background-color: #dbdbdb;
+  font-size: 1rem;
+}
+/*# sourceMappingURL=style.css.map */

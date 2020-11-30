@@ -27,6 +27,11 @@ const formatDate = (data) => {
     return day + ' ' + monthNames[month - 1] + ', ' + year;
 };
 
+const formatDateShort = (date) => {
+    return date.day + '.' + date.month + '.' + date.year;
+}
+
 export {
-    formatDate
+    formatDate,
+    formatDateShort
 }

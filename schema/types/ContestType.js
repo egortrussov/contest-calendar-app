@@ -20,6 +20,7 @@ const ContestType = new GraphQLObjectType({
        description: { type: GraphQLString },
        date: { type: DateType },
        website: { type: GraphQLString },
+       grade: { type: GraphQLInt },
        subject: {
            type: SubjectType,
            resolve(parent, args) {

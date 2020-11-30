@@ -27,7 +27,17 @@ export default class ContestsDisplayModal extends Component {
 
         const { isExtended } = this.state;
 
-        const { isHidden, date, isLoading } = this.props;
+        const { isHidden, date, isLoading, contests } = this.props;
+
+        const fields = [
+            { name: 'name', displayName: 'Name' },
+            { name: 'subject', displayName: 'Subject' },
+            { name: 'grade', displayName: 'Grade' },
+            { name: 'date', displayName: 'Date' },
+            { name: 'createdBy', displayName: 'Creator' },
+            { name: 'website', displayName: 'Website' }
+        ]
+
 
         return (
             <div className={ `display-modal ${ isExtended ? 'extended' : '' } ${ isHidden ? 'hidden' : '' }` }>
@@ -62,6 +72,8 @@ export default class ContestsDisplayModal extends Component {
                     ) : (
                         <ContestsTable
                             type="full"
+                            fields={ fields }
+                            contests={ contests }
                         />
                     )
                 }

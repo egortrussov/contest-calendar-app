@@ -157,14 +157,13 @@ export default class Calendar extends Component {
                         name
                     },
                     createdBy {
-                        fullName,
-                        organisation {
-                            name
-                        }
+                        fullName
                     }
                 }
             }
         `)
+
+        console.log(contestsData)
 
         this.setState({
             contestsToDisplay: contestsData.data.contests,
@@ -174,7 +173,7 @@ export default class Calendar extends Component {
 
     render() {
 
-        const { currentDate, monthsData, todaysDate, isContestsPageShown, isContestsPageLoading } = this.state;
+        const { currentDate, monthsData, todaysDate, isContestsPageShown, isContestsPageLoading, contestsToDisplay } = this.state;
 
         if (!this.context.token) {
             this.context.logout();
@@ -227,6 +226,7 @@ export default class Calendar extends Component {
                     closeModal={ () => this.closeModal() }
                     date={ currentDate }
                     isLoading={ isContestsPageLoading }
+                    contests={ contestsToDisplay }
                 />
             </div>
         )
