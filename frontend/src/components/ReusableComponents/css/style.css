@@ -13,6 +13,10 @@
   font-size: 1.7rem;
 }
 
+.heading.xsm {
+  font-size: 1.2rem;
+}
+
 .input-group {
   position: relative;
   width: 100%;
@@ -98,6 +102,33 @@
   cursor: pointer;
   margin-top: .5rem;
   position: relative;
+}
+
+.dropdown.small {
+  max-width: 200px;
+}
+
+.dropdown.small .selected {
+  padding: .4rem !important;
+  padding-left: .6rem !important;
+  font-size: .9rem;
+  border-radius: .5rem;
+}
+
+.dropdown.small .collapse .item {
+  padding: .4rem !important;
+  padding-left: .6rem !important;
+  font-size: .9rem;
+}
+
+.dropdown.small .collapse .item:first-child {
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+.dropdown.small .collapse .item:last-child {
+  border-bottom-left-radius: .5rem;
+  border-bottom-right-radius: .5rem;
 }
 
 .dropdown .selected {

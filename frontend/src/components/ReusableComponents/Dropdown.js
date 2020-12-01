@@ -17,12 +17,13 @@ export default class Dropdown extends Component {
 
     render() {
 
-        const { options, onSelect, currentOption, placeholder } = this.props;
+        const { options, onSelect, currentOption, placeholder, size } = this.props;
         const { isOpen } = this.state;
 
+        const extraClassName = size === 'sm' ? 'small' : '';
 
         return (
-            <div className="dropdown" onClick={ () => this.toggleOpenState() }>
+            <div className={ `dropdown ${ extraClassName }` } onClick={ () => this.toggleOpenState() }>
                 <div className={ `selected ${ isOpen ? "open" : "closed" }` }>
                     { currentOption ? currentOption : placeholder }
                     <div className="arrow">

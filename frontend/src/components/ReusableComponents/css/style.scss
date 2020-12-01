@@ -11,6 +11,10 @@
     &.sm {
         font-size: 1.7rem;
     }
+
+    &.xsm {
+        font-size: 1.2rem;
+    }
 }
 
 .input-group {
@@ -94,6 +98,36 @@
     cursor: pointer;
     margin-top: .5rem;
     position: relative;
+
+    &.small {
+        max-width: 200px;
+
+        .selected {
+            padding: .4rem !important;
+            padding-left: .6rem !important;
+            font-size: .9rem;
+            border-radius: .5rem
+        }
+
+        .collapse {
+
+            .item {
+                padding: .4rem !important;
+                padding-left: .6rem !important;
+                font-size: .9rem;
+
+                &:first-child {
+                    border-top-left-radius: .5rem;
+                    border-top-right-radius: .5rem;
+                }
+    
+                &:last-child {
+                    border-bottom-left-radius: .5rem;
+                    border-bottom-right-radius: .5rem;
+                }
+            }
+        }
+    }
 
     .selected {
         position: relative;

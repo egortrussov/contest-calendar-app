@@ -10,6 +10,7 @@ import Spinner from '../ReusableComponents/Spinner';
 
 import { formatDate } from '../../middleware/dateFromat';
 import ContestsTable from '../ContestsTable/ContestsTable';
+import FilterOptions from './FilterOptions/FilterOptions';
 
 export default class ContestsDisplayModal extends Component {
 
@@ -38,6 +39,14 @@ export default class ContestsDisplayModal extends Component {
             { name: 'website', displayName: 'Website' }
         ]
 
+        if (contests && !contests.length) return (
+            <div className={ `display-modal ${ isExtended ? 'extended' : '' } ${ isHidden ? 'hidden' : '' }` }>
+                <Heading
+                    type="sm"
+                    text={ 'There are no contests on ' + formatDate(date) }
+                />
+            </div>
+        )
 
         return (
             <div className={ `display-modal ${ isExtended ? 'extended' : '' } ${ isHidden ? 'hidden' : '' }` }>
@@ -58,25 +67,31 @@ export default class ContestsDisplayModal extends Component {
                             />
                         </div>
                     </div>
-                </div>
-                <Heading
-                    type="sm"
-                    text={ 'Contests for ' + formatDate(date) }
-                />
+                
+                    <Heading
+                        type="sm"
+                        text={ 'Contests for ' + formatDate(date) }
+                    />
 
-                {
-                    isLoading ? (
-                        <Spinner 
-                            size="md"
-                        />
-                    ) : (
-                        <ContestsTable
-                            type="full"
-                            fields={ fields }
-                            contests={ contests }
-                        />
-                    )
-                }
+                    <FilterOptions
+
+                    />
+
+                    {
+                        isLoading ? (
+                            <Spinner 
+                                size="md"
+                            />
+                        ) : (
+                            <ContestsTable
+                                type="full"
+                                fields={ fields }
+                                contests={ contests }
+                            />
+                        )
+                    }
+
+                </div>
 
             </div>
         )
