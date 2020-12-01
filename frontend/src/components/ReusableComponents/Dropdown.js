@@ -37,7 +37,7 @@ export default class Dropdown extends Component {
                     {
                         options.map((option, index) => (
                             <div className="item" onClick={ () => onSelect(index) }>
-                                { option }
+                                { option === null ? 'Any' : option }
                             </div>
                         ))
                     }

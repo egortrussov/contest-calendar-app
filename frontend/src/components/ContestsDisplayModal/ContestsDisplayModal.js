@@ -15,7 +15,13 @@ import FilterOptions from './FilterOptions/FilterOptions';
 export default class ContestsDisplayModal extends Component {
 
     state = {
-        isExtended: false
+        isExtended: false,
+        contests: [],
+        contestsToDisplay: [],
+        filterOptions: {
+            subject: null,
+            grade: null
+        }
     }
 
     toggleExtendedState() {
@@ -24,11 +30,39 @@ export default class ContestsDisplayModal extends Component {
         })
     }
 
+    setFilterOption(option, value) {
+        let { filterOptions } = this.state;
+
+        filterOptions[option] = value;
+
+        this.setState({
+            filterOptions
+        })
+    }
+
+    filterContests(contests) {
+        const { filterOptions } = this.state;
+
+        let res = contests.filter(contest => {
+            let result = true;
+            
+            if (filterOptions.grade && contest.grade !== filterOptions.grade) 
+                result = false;
+            
+            if (filterOptions.subject && contest.subject._id !== filterOptions.subject) 
+                result = false;
+            
+            return result;
+        })
+
+        return res;
+    }
+
     render() {
 
         const { isExtended } = this.state;
 
-        const { isHidden, date, isLoading, contests } = this.props;
+        let { isHidden, date, isLoading, contests } = this.props;
 
         const fields = [
             { name: 'name', displayName: 'Name' },
@@ -47,6 +81,8 @@ export default class ContestsDisplayModal extends Component {
                 />
             </div>
         )
+
+        contests = this.filterContests(contests)
 
         return (
             <div className={ `display-modal ${ isExtended ? 'extended' : '' } ${ isHidden ? 'hidden' : '' }` }>
@@ -74,7 +110,7 @@ export default class ContestsDisplayModal extends Component {
                     />
 
                     <FilterOptions
-
+                        setFilterOption={ (option, value) => this.setFilterOption(option, value) }
                     />
 
                     {

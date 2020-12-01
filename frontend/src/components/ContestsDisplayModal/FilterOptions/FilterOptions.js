@@ -11,8 +11,10 @@ export default class FilterOptions extends Component {
     state = {
         subjects: [],
         subjectsNames: [],
-        grades: [10, 2, 1, 5, 8, 11, 9, 3, 4, 6, 7],
+        grades: [null, 10, 2, 1, 5, 8, 11, 9, 3, 4, 6, 7],
         isLoading: true,
+        currentGradeName: 'Any',
+        currentSubjectName: 'Any'
     }
 
     async componentDidMount() {
@@ -27,6 +29,12 @@ export default class FilterOptions extends Component {
 
         let subjectsNames = subjectsData.data.subjects.map(subject => subject.name);
 
+        subjectsNames.unshift('Any')
+        subjectsData.data.subjects.unshift({
+            _id: null,
+            name: 'Any'
+        })
+
         this.setState({
             subjects: subjectsData.data.subjects,
             subjectsNames,
@@ -34,10 +42,29 @@ export default class FilterOptions extends Component {
         })
     }
     
+    setSubject(index) {
+        const { subjects } = this.state;
+
+        this.props.setFilterOption('subject', subjects[index]._id);
+
+        this.setState({
+            currentSubjectName: subjects[index].name
+        })
+    }
+
+    setGrade(index) {
+        const { grades } = this.state;
+
+        this.props.setFilterOption('grade', grades[index])
+
+        this.setState({
+            currentGradeName: grades[index]
+        })
+    }
 
     render() {
 
-        const { grades, subjects, isLoading, subjectsNames } = this.state;
+        const { grades, subjects, isLoading, subjectsNames, currentGradeName, currentSubjectName } = this.state;
 
         if (isLoading) return (
             <Spinner
@@ -60,6 +87,8 @@ export default class FilterOptions extends Component {
                             options={ subjectsNames }
                             currentOption={ 'Any' }
                             size="sm"
+                            onSelect={ (index) => this.setSubject(index)  }
+                            currentOption={ currentSubjectName }
                         />
                     </div>
                     <div className="option">
@@ -70,6 +99,8 @@ export default class FilterOptions extends Component {
                             options={ grades }
                             currentOption={ 'Any' }
                             size="sm"
+                            onSelect={ (index) => this.setGrade(index) }
+                            currentOption={ currentGradeName }
                         />
                     </div>
                 </div>
