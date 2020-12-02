@@ -75,10 +75,29 @@ export default class ContestsDisplayModal extends Component {
 
         if (contests && !contests.length) return (
             <div className={ `display-modal ${ isExtended ? 'extended' : '' } ${ isHidden ? 'hidden' : '' }` }>
-                <Heading
-                    type="sm"
-                    text={ 'There are no contests on ' + formatDate(date) }
-                />
+                <div className="content">
+                    <Heading
+                        type="sm"
+                        text={ 'There are no contests on ' + formatDate(date) }
+                    />
+                    <div className="handlers">
+                        <div 
+                            className={ `handler-btn ${ isExtended ? 'active' : '' }` }
+                            onClick={ () => this.toggleExtendedState() }
+                        >
+                            <FontAwesomeIcon
+                                icon={ faArrowUp }
+                                className="icon"
+                            />
+                        </div>
+                        <div className="handler-btn" onClick={ () => this.props.closeModal() }>
+                            <FontAwesomeIcon
+                                icon={ faTimes }
+                            />
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         )
 
