@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import Dropdown from '../../../components/ReusableComponents/Dropdown';
+import { Redirect } from 'react-router-dom'
 
+import Button from '../../../components/ReusableComponents/Button';
+import Dropdown from '../../../components/ReusableComponents/Dropdown';
 import Heading from '../../../components/ReusableComponents/Heading';
 import Input from '../../../components/ReusableComponents/InputField';
 import Spinner from '../../../components/ReusableComponents/Spinner';
+import { AuthContext } from '../../../Context/AuthContext';
 
 import { fetchQuery } from '../../../dataFetching/GraphQLQuery';
 
@@ -20,11 +23,24 @@ export default class CreateContest extends Component {
         currentSubjectIndex: null,
         gradesList: [10, 2, 1, 5, 8, 11, 9, 3, 4, 6, 7],
         grade: null,
+        date: null,
         isLoading: true,
-        errors: []
+        errors: [],
+        isRedirect: false,
+        isSubmitted: false
     }
 
+    static contextType = AuthContext;
+
     async componentDidMount() {
+
+        if (!this.context.user || !this.context.token || !this.context.user.isTeacher && !this.context.user.isAdmin) {
+            this.setState({
+                isRedirect: true
+            })
+            return;
+        }
+
         let subjectsData = await fetchQuery(`
             query {
                 subjects {
@@ -57,7 +73,7 @@ export default class CreateContest extends Component {
         const { subjectsList } = this.state;
 
         this.setState({
-            subject: subjectsList[index],
+            subject: subjectsList[index]._id,
             currentSubjectIndex: index
         })
     }
@@ -70,8 +86,86 @@ export default class CreateContest extends Component {
         })
     }
 
+    setDate(e) {
+        let value = e.target.value;
+
+        let date = new Date(value);
+
+        let newDate = {
+            day: date.getDate(),
+            month: date.getMonth() + 1,
+            year: date.getFullYear()
+        }
+
+        this.setState({
+            date: newDate
+        })
+    }
+
     handleSubmit(e) {
         e.preventDefault();
+
+        this.setState({
+            isSubmitted: true
+        })
+
+        const { 
+            name,
+            subject,
+            grade,
+            date,
+            description,
+            website,
+            
+        } = this.state;
+
+        let errors = [], hasErrors = false;
+
+        if (!name) { errors['name'] = 'Enter contest name'; hasErrors = true };
+        if (!subject) { errors['subject'] = 'Enter contest subject'; hasErrors = true };
+        if (!grade) { errors['grade'] = 'Enter contest grade'; hasErrors = true };
+        if (!date) { errors['date'] = 'Enter contest date'; hasErrors = true };
+
+        if (hasErrors) {
+            this.setState({
+                errors,
+                isSubmitted: false
+            });
+            return;
+        }
+
+        let request = {
+            name,
+            subject,
+            grade,
+            date,
+            description,
+            website
+        };
+
+        fetch(`${ this.context.proxy }/api/contest/createContest`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': this.context.token
+            },
+            body: JSON.stringify(request)
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+
+                if (!res.success) {
+                    errors['submit'] = 'Access denied';
+                    this.setState({
+                        errors,
+                        isSubmitted: false 
+                    })
+                    return;
+                }
+
+                
+            })
     }
 
     render() {
@@ -82,8 +176,16 @@ export default class CreateContest extends Component {
             subjectsNames, 
             currentSubjectIndex, 
             grade,
-            gradesList
+            gradesList,
+            isSubmitted,
+            isRedirect
         } = this.state;
+
+        if (isRedirect) return (
+            <Redirect 
+                to="/app/"
+            />
+        )
 
         if (isLoading) return (
             <Spinner />
@@ -125,11 +227,33 @@ export default class CreateContest extends Component {
                             placeholder={ 'Select grade' }
                         />
                     </div>
+                    <div className="input-group">
+                        <div className="label">
+                            Date
+                        </div>
+                        <input 
+                            type="date" 
+                            onChange={ (e) => this.setDate(e) } 
+                        />
+                    </div>
+                    <div className="input-group">
+                        <div className="label">
+                            Description (optional) 
+                        </div> 
+                        <textarea name="description" onChange={ (e) => this.setCredential(e) }></textarea>
+                        <label htmlFor="description"></label>
+                    </div>
                     <Input
                         type="text"
                         name="website"
                         label="Website (optional)"
                         onChange={ (e) => this.setCredential(e) }
+                    />
+
+                    <Button
+                        text="Create"
+                        type="cta"
+                        isLoading={ isSubmitted }
                     />
                 </form>
             </>

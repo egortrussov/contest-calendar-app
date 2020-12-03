@@ -32,7 +32,7 @@
         max-width: 250px;
     }
 
-    input {
+    input, textarea {
         background: none !important;
         border: none;
         border-bottom: 3px solid #ddd;
@@ -41,6 +41,7 @@
         color: var(--main-text-color);
         padding: .3rem;
         font-size: 1.1rem;
+        font-family: 'Nunito', sans-serif !important;
 
         &:focus {
             outline: none;
@@ -78,7 +79,17 @@
         height: 2px;
     }
 
-    input:focus + label {
+    textarea {
+        padding-bottom: 0;
+        max-height: 150px;
+        min-height: 50px;
+    }
+
+    textarea + label {
+        bottom: 5px
+    }
+
+    input:focus + label, textarea:focus + label {
         width: 100%;
     }
 

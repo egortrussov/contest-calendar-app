@@ -33,7 +33,7 @@
   max-width: 250px;
 }
 
-.input-group input {
+.input-group input, .input-group textarea {
   background: none !important;
   border: none;
   border-bottom: 3px solid #ddd;
@@ -42,13 +42,14 @@
   color: var(--main-text-color);
   padding: .3rem;
   font-size: 1.1rem;
+  font-family: 'Nunito', sans-serif !important;
 }
 
-.input-group input:focus {
+.input-group input:focus, .input-group textarea:focus {
   outline: none;
 }
 
-.input-group input.mini {
+.input-group input.mini, .input-group textarea.mini {
   max-width: 250px;
   border-bottom-width: 2px;
 }
@@ -82,7 +83,17 @@
   height: 2px;
 }
 
-.input-group input:focus + label {
+.input-group textarea {
+  padding-bottom: 0;
+  max-height: 150px;
+  min-height: 50px;
+}
+
+.input-group textarea + label {
+  bottom: 5px;
+}
+
+.input-group input:focus + label, .input-group textarea:focus + label {
   width: 100%;
 }
 
