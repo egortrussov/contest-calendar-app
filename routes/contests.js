@@ -77,6 +77,7 @@ router.post('/deleteContest', teacherAuth, (req, res) => {
 router.post('/featureContest', userAuth, (req, res) => {
     const { userId } = req.user;
     const { contestId } = req.body;
+    console.log(req)
 
     User 
         .findOne({ _id: userId })

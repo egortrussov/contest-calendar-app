@@ -19,7 +19,7 @@ export default class ContestsTable extends Component {
                         fields.map(field => (
                             <Cell
                                 text={ field.displayName }
-                                extraClassName={ field.name === 'grade' ? 'small' : '' }
+                                extraClassName={ field.name === 'grade' || field.name == 'featureContest' ? 'small' : '' }
                             />
                         ))
                     }

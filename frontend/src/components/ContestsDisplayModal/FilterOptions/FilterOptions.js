@@ -100,7 +100,7 @@ export default class FilterOptions extends Component {
                             currentOption={ 'Any' }
                             size="sm"
                             onSelect={ (index) => this.setGrade(index) }
-                            currentOption={ currentGradeName }
+                            currentOption={ currentGradeName === null ? 'Any' : currentGradeName }
                         />
                     </div>
                 </div>

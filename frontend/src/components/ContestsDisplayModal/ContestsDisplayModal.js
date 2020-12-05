@@ -69,8 +69,9 @@ export default class ContestsDisplayModal extends Component {
             { name: 'subject', displayName: 'Subject' },
             { name: 'grade', displayName: 'Grade' },
             { name: 'date', displayName: 'Date' },
-            { name: 'createdBy', displayName: 'Creator' },
-            { name: 'website', displayName: 'Website' }
+            // { name: 'createdBy', displayName: 'Creator' },
+            { name: 'website', displayName: 'Website' },
+            { name: 'featureContest', displayName: '' },
         ]
 
         if (contests && !contests.length) return (

@@ -1,0 +1,16 @@
+.feature-contest-icon {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #cecece;
+}
+
+.feature-contest-icon .icon {
+  cursor: pointer;
+}
+
+.feature-contest-icon .icon.active {
+  color: #ffbe33;
+  text-shadow: 1px 1px 10px #000;
+}
+/*# sourceMappingURL=style.css.map */

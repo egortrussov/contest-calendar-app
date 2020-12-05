@@ -4,6 +4,7 @@ import { formatDateShort } from '../../middleware/dateFromat';
 import Cell from './Cell';
 
 export default class TableRow extends Component {
+
     render() {
 
         const { contest, fields } = this.props;
@@ -13,22 +14,35 @@ export default class TableRow extends Component {
                 {
                     fields.map(field => {
                         let { name } = field;
+                        
+                        if (name === 'featureContest') {
+                            return (
+                                <Cell 
+                                    extraClassName="small"
+                                    text="effe"
+                                    isFeature={ true }
+                                    contestId={ contest._id }
+                                />
+                            )
+                        }
+
                         let text = contest[name];
 
-                        if (name == 'createdBy') 
+                        if (name === 'createdBy') 
                             text = contest.createdBy.fullName;
 
-                        if (name == 'subject') 
+                        if (name === 'subject') 
                             text = contest.subject.name;
                         
-                        if (name == 'date') 
+                        if (name === 'date') 
                             text = formatDateShort(contest.date)
                         
                         let extraClassName = '';
 
-                        if (name == 'grade') 
+                        if (name === 'grade') 
                             extraClassName = 'small'
                         
+
 
                         return (
                             <Cell
