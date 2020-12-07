@@ -67,6 +67,10 @@ const RootQuery = new GraphQLObjectType({
                     type: graphql.GraphQLString,
                     defaultValue: null
                 },
+                contestsIDs: {
+                    type: new GraphQLList(GraphQLID),
+                    defaultValue: null
+                },
                 subject: {
                     type: graphql.GraphQLID,
                     defaultValue: null
@@ -86,6 +90,10 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve(parent, args) {
                 const { searchType } = args;
+                
+                if (searchType === 'array') 
+                    return Contest 
+                                .find({ _id: { $in: args.contestsIDs } })
 
                 if (searchType === 'subject') 
                     return Contest 
