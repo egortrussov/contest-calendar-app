@@ -65,13 +65,13 @@ export default class ContestsDisplayModal extends Component {
         let { isHidden, date, isLoading, contests } = this.props;
 
         const fields = [
+            { name: 'featureContest', displayName: '' },
             { name: 'name', displayName: 'Name' },
             { name: 'subject', displayName: 'Subject' },
             { name: 'grade', displayName: 'Grade' },
             { name: 'date', displayName: 'Date' },
             // { name: 'createdBy', displayName: 'Creator' },
             { name: 'website', displayName: 'Website' },
-            { name: 'featureContest', displayName: '' },
         ]
 
         if (contests && !contests.length) return (

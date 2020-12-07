@@ -1,0 +1,16 @@
+.filter-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1rem;
+}
+
+.filter-block .label {
+  margin-left: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+/*# sourceMappingURL=style.css.map */

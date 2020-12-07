@@ -1,0 +1,12 @@
+.filter-block {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    // margin-bottom: .3rem;
+
+    .label {
+        margin-left: 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+}

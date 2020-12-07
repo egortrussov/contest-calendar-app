@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import ContestsTable from '../../../components/ContestsTable/ContestsTable';
+import PassedContestFilter from '../../../components/PassedContestFilter/PassedContestFilter';
 import Heading from '../../../components/ReusableComponents/Heading';
 import Spinner from '../../../components/ReusableComponents/Spinner';
 import UserInfoCard from '../../../components/UserInfoCard/UserInfoCard';
 
 import { AuthContext } from '../../../Context/AuthContext'
 import { fetchQuery } from '../../../dataFetching/GraphQLQuery';
+import { getCurrentDate } from '../../../middleware/getCurrentDate';
+import { hasContestEnded, sortContests } from '../../../middleware/sortContests';
+
+import './css/style.css'
 
 export default class Profile extends Component {
 
@@ -15,10 +20,17 @@ export default class Profile extends Component {
         user: null,
         featuredContests: null,
         isRedirectToLogin: false,
-        respWasSent: false
+        respWasSent: false,
+        isPassedContestsShown: true
     }
 
     static contextType = AuthContext;
+
+    togglePassedContestsShowState() {
+        this.setState({
+            isPassedContestsShown: !this.state.isPassedContestsShown
+        })
+    }
 
     async getContests() {
 
@@ -75,13 +87,12 @@ export default class Profile extends Component {
         this.setState({
             featuredContests: featuredContestsData.data.contests
         })
-    }
-    
+    }    
 
     render() {
 
         const { user } = this.context;
-        const { featuredContests, isRedirectToLogin, respWasSent } = this.state;
+        let { featuredContests, isRedirectToLogin, respWasSent, isPassedContestsShown } = this.state;
         
         if (isRedirectToLogin) return (
             <Redirect 
@@ -97,14 +108,19 @@ export default class Profile extends Component {
             this.getContests()
 
         const fields = [
+            { name: 'featureContest', displayName: '' },
             { name: 'name', displayName: 'Name' },
             { name: 'subject', displayName: 'Subject' },
             { name: 'grade', displayName: 'Grade' },
             { name: 'date', displayName: 'Date' },
             { name: 'createdBy', displayName: 'Creator' },
             { name: 'website', displayName: 'Website' },
-            { name: 'featureContest', displayName: '' },
         ]
+
+        featuredContests = sortContests(featuredContests)
+
+        if (!isPassedContestsShown && featuredContests) 
+            featuredContests = featuredContests.filter(contest => !hasContestEnded(contest, getCurrentDate()))
 
         return (
             <>
@@ -115,23 +131,38 @@ export default class Profile extends Component {
                     user={ user }
                 />
 
-                {
-                    featuredContests === null ? (
-                        <Spinner
-                            size="md"
-                        />
-                    ) : featuredContests && featuredContests.length === 0 ? (
-                        <Heading
-                            size="md"
-                            text="No featured contests yet"
-                        />
-                    ) : ( 
-                       <ContestsTable
-                            fields={ fields }
-                            featuredContests={ featuredContests }
-                        /> 
-                    )
-                }
+                <PassedContestFilter
+                    isSelected={ isPassedContestsShown }
+                    onChange={ () => this.togglePassedContestsShowState() }
+                />
+
+                <div className="contests-container">
+
+                    {
+                        featuredContests === null ? (
+                            <Spinner
+                                size="md"
+                            />
+                        ) : featuredContests && featuredContests.length === 0 ? (
+                            <Heading
+                                type="sm"
+                                text="No featured contests yet"
+                            />
+                        ) : ( 
+                            <>
+                                <Heading
+                                    type="sm"
+                                    text="Featured contests: "
+                                />
+                                
+                                <ContestsTable
+                                    fields={ fields }
+                                    contests={ featuredContests }
+                                />
+                            </> 
+                        )
+                    }
+                </div>
             </>
         )
     }
