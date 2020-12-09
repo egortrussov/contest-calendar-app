@@ -64,7 +64,7 @@ export default class FilterOptions extends Component {
 
     render() {
 
-        const { grades, subjects, isLoading, subjectsNames, currentGradeName, currentSubjectName } = this.state;
+        const { grades, subjects, isLoading, subjectsNames, currentGradeName, currentSubjectName, page } = this.state;
 
         if (isLoading) return (
             <Spinner
@@ -72,11 +72,44 @@ export default class FilterOptions extends Component {
             />
         )
 
+        if (page === 'browseContests') return (
+            <div className="filter-options">
+                <Heading
+                    type="xsm"
+                    text="Filter by: "
+                />
+                <div className="options">
+                    <div className="option">
+                        <div className="label">
+                            Subject: 
+                        </div>
+                        <Dropdown
+                            options={ subjectsNames }
+                            currentOption={ 'Any' }
+                            onSelect={ (index) => this.setSubject(index)  }
+                            currentOption={ currentSubjectName }
+                        />
+                    </div>
+                    <div className="option">
+                        <div className="label">
+                            Grade: 
+                        </div>
+                        <Dropdown
+                            options={ grades }
+                            currentOption={ 'Any' }
+                            onSelect={ (index) => this.setGrade(index) }
+                            currentOption={ currentGradeName === null ? 'Any' : currentGradeName }
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+
         return (
             <div className="filter-options">
                 <Heading
                     type="xsm"
-                    text="Fulter by: "
+                    text="Filter by: "
                 />
                 <div className="options">
                     <div className="option">

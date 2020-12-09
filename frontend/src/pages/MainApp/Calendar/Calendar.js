@@ -31,7 +31,7 @@ export default class Calendar extends Component {
         monthsData: [],
         isRedirectToLogin: false,
         searchType: null,
-        isContestsPageShown: true,
+        isContestsPageShown: false,
         contestsToDisplay: [],
         isContestsPageLoading: false
     }

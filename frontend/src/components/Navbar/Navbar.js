@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import { init } from './navbarScript'
 
@@ -29,8 +28,6 @@ class Navbar extends Component {
     }
 
     render() {
-
-        // const token = Cookies.get('token');
 
         const { user, token } = this.context;
 
@@ -62,7 +59,7 @@ class Navbar extends Component {
 
                             <NavLink exact className="nav-link" to={"/app/"}><FontAwesomeIcon className="icon" icon={ faCalendarTimes } /> <span className="text">Calendar</span></NavLink>
 
-                            <NavLink className="nav-link" to={"/app/subjects"}><FontAwesomeIcon className="icon" icon={ faAlignLeft } /><span className="text">Browse subjects</span></NavLink>
+                            <NavLink className="nav-link" to={"/app/browseContests"}><FontAwesomeIcon className="icon" icon={ faAlignLeft } /><span className="text">Browse contests</span></NavLink>
 
                             {
                                 (user.isTeacher || user.isAdmin) ? (

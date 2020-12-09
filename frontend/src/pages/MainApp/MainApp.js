@@ -11,6 +11,7 @@ import Calendar from './Calendar/Calendar'
 import CreateContest from './CreateContest/CreateContest'
 
 import './css/MainApp.css'
+import BrowseContests from './BrowseContests/BrowseContests'
 
 export default class MainApp extends Component {
 
@@ -25,6 +26,7 @@ export default class MainApp extends Component {
                             <Route path="/app/login" component={ Login } />
                             <Route path="/app/profile" component={ Profile } />
                             <Route path="/app/createContest" component={ CreateContest } />
+                            <Route path="/app/browseContests" component={ BrowseContests } />
                             <Route path="/app/" component={ Calendar } />
                         </Switch>
                     </main>

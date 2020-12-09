@@ -21,6 +21,12 @@
             width: 100%;
             min-width: 200px;
             display: inline-block;
+            padding-right: 1rem;
+
+            .dropdown {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
 
             .label {
                 font-weight: bold;

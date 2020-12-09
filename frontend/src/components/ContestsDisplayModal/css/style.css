@@ -31,6 +31,12 @@
   width: 100%;
   min-width: 200px;
   display: inline-block;
+  padding-right: 1rem;
+}
+
+.filter-options .options .option .dropdown {
+  width: 100% !important;
+  min-width: 100% !important;
 }
 
 .filter-options .options .option .label {
