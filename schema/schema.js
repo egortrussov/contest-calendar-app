@@ -67,12 +67,20 @@ const RootQuery = new GraphQLObjectType({
                     type: graphql.GraphQLString,
                     defaultValue: null
                 },
+                contestId: {
+                    type: GraphQLID,
+                    defaultValue: null
+                },
                 contestsIDs: {
                     type: new GraphQLList(GraphQLID),
                     defaultValue: null
                 },
                 subject: {
                     type: graphql.GraphQLID,
+                    defaultValue: null
+                },
+                grade: {
+                    type: graphql.GraphQLInt,
                     defaultValue: null
                 },
                 day: {
@@ -90,34 +98,28 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve(parent, args) {
                 const { searchType } = args;
-                
-                if (searchType === 'array') 
-                    return Contest 
-                                .find({ _id: { $in: args.contestsIDs } })
 
-                if (searchType === 'subject') 
-                    return Contest 
-                                .find({ subject: args.subject })
-                
-                if (searchType === 'day') 
-                    return Contest 
-                                .find({ 
-                                    date: { 
-                                        day: args.day,
-                                        month: args.month,
-                                        year: args.year
-                                    } 
-                                })
-                
-                if (searchType === 'month') 
-                    return Contest 
-                                .find({ 
-                                    'date.month': args.month,
-                                    'date.year': args.year
-                                    
-                                })
+                let query = {};
 
-                return Contest.find()
+
+                if (args.contestId) 
+                    query._id = args.contestId;
+                else if (args.contestsIDs) 
+                    query._id = { $in: args.contestsIDs };
+                
+                if (args.subject)
+                    query.subject = args.subject;
+                if (args.grade)
+                    query.grade = args.grade;
+                
+                if (args.day)
+                    query['date.day'] = args.day;
+                if (args.month)
+                    query['date.month'] = args.month;
+                if (args.year)
+                    query['date.year'] = args.year;
+                
+                return Contest.find(query)
             }
         },
         organisations: {

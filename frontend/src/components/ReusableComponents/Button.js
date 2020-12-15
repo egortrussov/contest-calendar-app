@@ -13,7 +13,7 @@ export default class Button extends Component {
             clickFunction = this.props.onClick;
 
         return (
-            <button className={ `button ${ type } ${ isLoading ? 'disabled' : '' }` } onClick={ !isLoading ?  () => clickFunction : false }>
+            <button className={ `button ${ type } ${ isLoading ? 'disabled' : '' }` } onClick={ !isLoading ?  () => clickFunction() : false }>
                 {
                     isLoading ? (
                         <Spinner 
