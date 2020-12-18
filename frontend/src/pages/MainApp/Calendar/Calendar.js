@@ -60,6 +60,8 @@ export default class Calendar extends Component {
             year: date.getFullYear()
         }
 
+        console.log('uhuhuhu')
+
         this.setState({
             currentDate,
             todaysDate: currentDate
@@ -194,7 +196,7 @@ export default class Calendar extends Component {
                 />
                 <div className="date-info">
                     <div className="left">
-                        <p className="curret-date">
+                        <p className="current-date">
                             { formatDate(todaysDate) }
                         </p>
                     </div>

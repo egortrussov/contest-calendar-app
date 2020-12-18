@@ -31,7 +31,7 @@ export default class BrowseContests extends Component {
 
         this.setState({
             filterOptions
-        })
+        }, () => this.getContests())
     }
 
     togglePassedContestsShowState() {
@@ -113,6 +113,7 @@ export default class BrowseContests extends Component {
         if (!isPassedContestsShown && contests) 
             contests = contests.filter(contest => !hasContestEnded(contest, getCurrentDate()))
         
+        console.log(contests)
         
 
         return (
@@ -124,12 +125,12 @@ export default class BrowseContests extends Component {
                     page="browseContests"
                     setFilterOption={ (option, value) => this.setFilterOption(option, value) }
                 />
-                <Button
+                {/* <Button
                     type="cta"
                     text="Search"
                     onClick={ () => this.getContests() }
                     isLoading={ isSubmitted }
-                />
+                /> */}
                 <PassedContestFilter
                     isSelected={ isPassedContestsShown }
                     onChange={ () => this.togglePassedContestsShowState() }
@@ -138,7 +139,7 @@ export default class BrowseContests extends Component {
                 {
                     contests === null ? (
                         <></>
-                    ) : contests === [] ? (
+                    ) : contests.length === 0 ? (
                         <>
                             <Heading
                                 text="No contests!"

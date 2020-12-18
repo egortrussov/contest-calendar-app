@@ -31,6 +31,7 @@ export default class MonthCard extends Component {
         const { monthData, monthName, monthInx, isCurrent, currentDate, todaysDate } = this.props;
 
         let days = [];
+        let weekDays = ['mn', 'tu', 'wd', 'th', 'fr', 'st', 'sn'];
 
         for (let i = 0; i < monthData.missedDays; i++) 
             days.push((
@@ -62,6 +63,14 @@ export default class MonthCard extends Component {
                 />
             ))
         }
+
+        let weekDaysRow = [];
+
+        weekDays.forEach(day => weekDaysRow.push((
+            <div className="weekday-node">
+                { day }
+            </div>
+        )))
         
         let currClassName = isCurrent ? 'active' : '';
 
@@ -71,6 +80,7 @@ export default class MonthCard extends Component {
                     { monthName }
                 </div>
                 <div className="bottom">
+                    { weekDaysRow }
                     { days }
                 </div>
             </div>
