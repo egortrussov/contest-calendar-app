@@ -60,8 +60,6 @@ export default class Calendar extends Component {
             year: date.getFullYear()
         }
 
-        console.log('uhuhuhu')
-
         this.setState({
             currentDate,
             todaysDate: currentDate
@@ -165,7 +163,6 @@ export default class Calendar extends Component {
             }
         `)
 
-        console.log(contestsData)
 
         this.setState({
             contestsToDisplay: contestsData.data.contests,

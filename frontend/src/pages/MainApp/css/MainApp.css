@@ -49,7 +49,8 @@
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    width: 100%;
+    width: 100% !important;
+    min-width: 100% !important;
     height: auto;
   }
   .app-container nav .nav-top .text {

@@ -9,6 +9,7 @@ import Register from './Auth/Register/Register'
 import Profile from './Profile/Profile'
 import Calendar from './Calendar/Calendar'
 import CreateContest from './CreateContest/CreateContest'
+import AdminPanel from './AdminPanel/AdminPanel'
 
 import './css/MainApp.css'
 import BrowseContests from './BrowseContests/BrowseContests'
@@ -27,6 +28,7 @@ export default class MainApp extends Component {
                             <Route path="/app/profile" component={ Profile } />
                             <Route path="/app/createContest" component={ CreateContest } />
                             <Route path="/app/browseContests" component={ BrowseContests } />
+                            <Route path="/app/admin" component={ AdminPanel } />
                             <Route path="/app/" component={ Calendar } />
                         </Switch>
                     </main>
