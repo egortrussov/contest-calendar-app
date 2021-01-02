@@ -1,0 +1,17 @@
+.links-container {
+
+    .link {
+        margin-bottom: .5rem;
+
+        a {
+            text-decoration: none !important;
+            font-size: 1.1rem;
+            color: #000;
+            transition: all .1s;
+
+            &:hover {
+                color: var(--primary-color);
+            }
+        }
+    }
+}

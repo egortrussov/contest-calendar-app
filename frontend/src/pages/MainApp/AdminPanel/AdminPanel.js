@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-
-import { AuthContext } from '../../../Context/AuthContext'
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 
 import Heading from '../../../components/ReusableComponents/Heading'
 import Spinner from '../../../components/ReusableComponents/Spinner';
-import { Link, Redirect } from 'react-router-dom';
+
+import { AuthContext } from '../../../Context/AuthContext'
+
+import './css/style.css'
+import FrontPage from './FrontPage/FrontPage';
+import SubjectsOverviewPage from './SubjectsOverviewPage/SubjectsOverviewPage';
 
 export default class AdminPanel extends Component {
 
@@ -67,21 +71,10 @@ export default class AdminPanel extends Component {
 
         return (
             <>
-                <Heading
-                    text="Admin panel"
-                />
-                <div className="links-container">
-                    <div className="link">
-                        <Link to="admin/subjects"> 
-                            Manage subjects
-                        </Link>
-                    </div>
-                    <div className="link">
-                        <Link to="admin/subjects"> 
-                            Manage organisations
-                        </Link>
-                    </div>
-                </div>
+                <Switch>
+                    <Route exact path="/app/admin/" component={ FrontPage } />
+                    <Route path="/app/admin/subjects" component={ SubjectsOverviewPage } />
+                </Switch>
             </>
         )
     }

@@ -1,0 +1,17 @@
+.go-back-link {
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+
+    .icon {
+        font-size: 25px;
+    }
+
+    .label {
+        margin-left: 15px;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+}
