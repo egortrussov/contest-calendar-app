@@ -24,4 +24,19 @@ router.post('/createSubject', adminAuth, (req, res) => {
         })
 })
 
+router.post('/deleteSubject', adminAuth, (req, res) => {
+    const { _id } = req.body;
+
+    Subject
+        .findOneAndDelete({ _id: _id }) 
+        .then(subject => {
+            res 
+                .status(200)
+                .json({
+                    success: true,
+                    deletedSubject: subject
+                })
+        })
+})
+
 module.exports = router;

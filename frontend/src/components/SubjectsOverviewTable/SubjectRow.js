@@ -23,6 +23,7 @@ export default class SubjectRow extends Component {
                     <FontAwesomeIcon
                         className="icon"
                         icon={ faTimes }
+                        onClick={ () => this.props.deleteSubject(subject._id) }
                     />
                 </div>
             </div>

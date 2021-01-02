@@ -16,6 +16,7 @@ export default class CreateSubjectForm extends Component {
                     <Input 
                         type="text"
                         name="name"
+                        onChange={ (e) => true }
                     />
                     <Button
                         type="cta"

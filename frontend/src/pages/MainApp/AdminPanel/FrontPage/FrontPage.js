@@ -12,12 +12,12 @@ export default class FrontPage extends Component {
                 /> 
                 <div className="links-container">
                     <div className="link">
-                        <Link to="subjects"> 
+                        <Link to="/app/admin/subjects"> 
                             Manage subjects
                         </Link>
                     </div>
                     <div className="link">
-                        <Link to="organisations"> 
+                        <Link to="/app/admin/organisations"> 
                             Manage organisations
                         </Link>
                     </div>

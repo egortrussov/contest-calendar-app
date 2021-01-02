@@ -26,6 +26,7 @@ export default class SubjectsOverviewTable extends Component {
                     subjects.map(subject => (
                         <SubjectRow
                             subject={ subject }
+                            deleteSubject={ (_id) => this.props.deleteSubject(_id) }
                         />
                     ))
                 }

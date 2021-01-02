@@ -59,6 +59,44 @@ export default class SubjectsOverviewPage extends Component {
         return res;
     }    
 
+    createSubject(e) {
+        e.preventDefault();
+
+        console.log(this.context.token)
+
+        let formData = new FormData(e.target);
+        let name = formData.get('name');
+
+        fetch(`${ this.context.proxy }/api/subject/createSubject`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': this.context.token 
+            },
+            body: JSON.stringify({ name: name })
+        }) 
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+            })
+    }
+
+    deleteSubject(_id) {
+        fetch(`${ this.context.proxy }/api/subject/deleteSubject`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': this.context.token 
+            },
+            body: JSON.stringify({ _id })
+        }) 
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+            })
+    }
+
+
     render() {
 
         let { subjects } = this.state;
@@ -93,7 +131,7 @@ export default class SubjectsOverviewPage extends Component {
                     type="md"
                 />
                 <CreateSubjectForm
-                    
+                    onSubmit={ (e) => this.createSubject(e) }
                 />
                 {
                     subjects === null ? (
@@ -106,6 +144,7 @@ export default class SubjectsOverviewPage extends Component {
                     ) : (
                         <SubjectsOverviewTable
                             subjects={ subjects }
+                            deleteSubject={ (_id) => this.deleteSubject(_id) }
                         />
                     )
                 }
