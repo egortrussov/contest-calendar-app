@@ -1,0 +1,19 @@
+.create-subject-form .label {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.create-subject-form .group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.create-subject-form .group button {
+  font-size: 1rem !important;
+  padding: .2rem 1rem !important;
+  min-width: 130px !important;
+  height: 40px;
+  margin-left: 1rem;
+}
+/*# sourceMappingURL=style.css.map */

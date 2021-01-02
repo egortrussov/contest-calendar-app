@@ -1,0 +1,14 @@
+.contests-table.subjects-overview {
+  min-width: 320px !important;
+}
+
+.contests-table.subjects-overview .cell.small {
+  text-align: center;
+}
+
+.contests-table.subjects-overview .cell.small .icon {
+  font-size: 20px;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */
