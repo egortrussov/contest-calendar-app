@@ -10,4 +10,33 @@
             cursor: pointer;
         }
     }
+
+    .cell {
+        form {
+            display: flex;
+            
+            input {
+                height: 100%;
+                padding: .5rem;
+                width: 100%;
+                border: .5px solid #d4d4d4;
+                font-family: 'Nunito', sans-serif;
+            }
+
+            button {
+                margin-left: .3rem;
+                font-family: 'Nunito', sans-serif;
+                padding: .5rem .7rem;
+                font-weight: bold;
+                cursor: pointer;
+                // background-color: #fff;
+                // border: 2px solid var(--primary-color);
+                border: none;
+                background-color: var(--primary-color);
+                color: #fff;
+                border-radius: .4rem;
+                // color
+            }
+        }
+    }
 }

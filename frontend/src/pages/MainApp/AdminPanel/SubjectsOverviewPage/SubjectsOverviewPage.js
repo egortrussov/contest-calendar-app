@@ -125,6 +125,49 @@ export default class SubjectsOverviewPage extends Component {
             })
     }
 
+    changeEditedSubjectName(name) {
+        let { editedSubjectId, subjects } = this.state;
+
+        for (let inx = 0; inx < subjects.length; inx++) {
+            if (subjects[inx]._id === editedSubjectId) 
+                subjects[inx].name = name;
+        }
+        
+        this.setState({
+            subjects
+        })
+    }
+
+    setEditedSubjectName(e) {
+        e.preventDefault();
+
+        let { editedSubjectId, subjects } = this.state;
+
+        let { name } = subjects.find(sbj => sbj._id === editedSubjectId);
+
+        let requestBody = {
+            _id: editedSubjectId,
+            name
+        }
+
+        fetch(`${ this.context.proxy }/api/subject/changeSubjectName`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': this.context.token 
+            },
+            body: JSON.stringify(requestBody)
+        }) 
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                this.setState({
+                    editedSubjectId: null
+                })
+                // this.deleteSubjectFromState(_id);
+            })
+    }
+
 
     render() {
 
@@ -175,6 +218,8 @@ export default class SubjectsOverviewPage extends Component {
                             subjects={ subjects }
                             deleteSubject={ (_id) => this.deleteSubject(_id) }
                             chooseSubjectToEdit={ (_id) => this.chooseSubjectToEdit(_id) }
+                            changeEditedSubjectName={ (name) => this.changeEditedSubjectName(name) }
+                            setEditedSubjectName={ (e) => this.setEditedSubjectName(e) }
                             editedSubjectId={ editedSubjectId }
                         /> 
                     )

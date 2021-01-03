@@ -39,4 +39,25 @@ router.post('/deleteSubject', adminAuth, (req, res) => {
         })
 })
 
+router.post('/changeSubjectName', adminAuth, (req, res) => {
+    const { _id, name } = req.body;
+
+    Subject
+        .findOne({ _id: _id }) 
+        .then(subject => {
+            subject.name = name;
+
+            subject 
+                .save() 
+                .then(savedSubject => {
+                    res 
+                        .status(200)
+                        .json({
+                            success: true,
+                            subject: savedSubject
+                        })
+                })
+        })
+})
+
 module.exports = router;
