@@ -7,6 +7,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.create-subject-form .group .input-group {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
 }
 
 .create-subject-form .group button {
@@ -14,6 +23,5 @@
   padding: .2rem 1rem !important;
   min-width: 130px !important;
   height: 40px;
-  margin-left: 1rem;
 }
 /*# sourceMappingURL=style.css.map */

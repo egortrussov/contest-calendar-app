@@ -7,7 +7,7 @@ import './css/style.css'
 export default class SubjectsOverviewTable extends Component {
     render() {
 
-        const { subjects } = this.props;
+        const { subjects, editedSubjectId } = this.props;
 
         return (
             <div className="contests-table subjects-overview">
@@ -27,6 +27,10 @@ export default class SubjectsOverviewTable extends Component {
                         <SubjectRow
                             subject={ subject }
                             deleteSubject={ (_id) => this.props.deleteSubject(_id) }
+                            chooseSubjectToEdit={ (_id) => this.props.chooseSubjectToEdit(_id) }
+                            changeEditedSubjectName={ (name) => this.props.changeEditedSubjectName(name) }
+                            setEditedSubjectName={ (e) => this.props.setEditedSubjectName(e) }
+                            isBeingEdited={ editedSubjectId === subject._id }
                         />
                     ))
                 }

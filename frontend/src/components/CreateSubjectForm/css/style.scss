@@ -7,13 +7,18 @@
 
     .group {
         display: flex;
+        flex-flow: row wrap;
+
+        .input-group {
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
 
         button {
             font-size: 1rem !important;
             padding: .2rem 1rem !important;
             min-width: 130px !important;
             height: 40px;
-            margin-left: 1rem;
         }
     }
 }

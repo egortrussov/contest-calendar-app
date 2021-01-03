@@ -14,7 +14,8 @@ export default class SubjectsOverviewPage extends Component {
 
     state = {
         subjects: null,
-        isSubmitted: false
+        isSubmitted: false,
+        editedSubjectId: null
     }
 
     static contextType = AuthContext
@@ -59,6 +60,26 @@ export default class SubjectsOverviewPage extends Component {
         return res;
     }    
 
+    deleteSubjectFromState(_id) {
+        let { subjects } = this.state;
+
+        subjects = subjects.filter(sbj => sbj._id !== _id);
+
+        this.setState({
+            subjects
+        })
+    }
+
+    addSubjectToState(subject) {
+        let { subjects } = this.state;
+
+        subjects.push(subject)
+
+        this.setState({
+            subjects
+        })
+    }
+
     createSubject(e) {
         e.preventDefault();
 
@@ -78,7 +99,14 @@ export default class SubjectsOverviewPage extends Component {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
+                this.addSubjectToState(res.subject)
             })
+    }
+
+    chooseSubjectToEdit(_id) {
+        this.setState({
+            editedSubjectId: _id
+        })
     }
 
     deleteSubject(_id) {
@@ -93,13 +121,14 @@ export default class SubjectsOverviewPage extends Component {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
+                this.deleteSubjectFromState(_id);
             })
     }
 
 
     render() {
 
-        let { subjects } = this.state;
+        let { subjects, editedSubjectId } = this.state;
         let { isLoading, isRedirectToLogin, isRedirect } = this.chechAuthState();
  
         if (isLoading) return (
@@ -145,7 +174,9 @@ export default class SubjectsOverviewPage extends Component {
                         <SubjectsOverviewTable
                             subjects={ subjects }
                             deleteSubject={ (_id) => this.deleteSubject(_id) }
-                        />
+                            chooseSubjectToEdit={ (_id) => this.chooseSubjectToEdit(_id) }
+                            editedSubjectId={ editedSubjectId }
+                        /> 
                     )
                 }
             </div>
