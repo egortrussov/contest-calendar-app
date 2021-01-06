@@ -1,14 +1,39 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import Logo from './img/logo1.svg'
+import LogoLight from './img/logo-light1.svg'
+import Hero from './img/hero.svg'
+
+import './css/style.css'
+
 export default class LandingPage extends Component {
     render() {
         return (
-            <div>
-                <Link to="/app"> 
-                    Go to app yo
-                </Link>
-            </div>
+            <header>
+                {/* <div className="bg-circle-lg bg-circle"></div> */}
+                <div className="bg-circle-md bg-circle"></div>
+                <div className="bg-circle-dm bg-circle"></div>
+                <div className="nav">
+                    <div className="nav-left">
+                        {/* <img className="light" src={ Logo } alt="" />
+                        <img className="dark" src={ LogoLight } alt="" /> */}
+                        <h1>EasyCalendar</h1>
+                    </div>
+                </div>
+                <div className="hero">
+                    <div className="hero-left">
+                        <h1>Get your contest planning experience to a whole new level of suffering!</h1>
+                        <Link className="cta" to="/app/">Try it out!</Link>
+                    </div>
+                    <div className="hero-right">
+                        <img src={ Hero } alt="" />
+                    </div>
+                </div>
+                <div className="copyright">
+                    EasyCalendarApp ALPHA <br/> &copy; 2021 Yegor Trussov
+                </div>
+            </header>
         )
     }
 }
