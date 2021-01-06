@@ -18,6 +18,7 @@ html {
 
 body {
     font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
 }
 
 a {
@@ -25,5 +26,5 @@ a {
 }
 
 html {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }

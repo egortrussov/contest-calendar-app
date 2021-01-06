@@ -1,14 +1,28 @@
+@import '../../../GlobalCSS/config';
+
 .heading {
+    @include tablet-xsm {
+        font-size: 2rem;
+    }
+
     font-weight: 800;
     margin-bottom: 1rem;
     font-size: 2.5rem;
     padding-top: 0;
 
     &.md {
+        @include tablet-xsm {
+            font-size: 1.8rem;
+        }
+
         font-size: 2rem;
     }
 
     &.sm {
+        @include tablet-xsm {
+            font-size: 1.5rem;
+        }
+
         font-size: 1.7rem;
     }
 

@@ -27,6 +27,17 @@
                     display: none !important;
                 }
             }
+
+            .nav-item {
+                display: flex;
+                flex-direction: row !important;
+            }
+
+            .nav-link {
+                width: 30px;
+                // margin: 0 !important;
+                // padding: 0 !important;
+            }
         }
 
         display: flex;
@@ -161,6 +172,7 @@
                     text-align: center;
                     width: auto;
                     height: 100%;
+                    padding: 0 25px !important;
                 }
 
                 position: relative;
@@ -179,7 +191,6 @@
                     }
                     
                     white-space: nowrap;
-                    // opacity: 1;
                     transition: all .2s;
 
                     &.hidden {
@@ -190,7 +201,7 @@
                 
                 .icon {
                     @include tablet-xsm {
-                        left: 0;
+                        left: 0;    
                         right: 0;
                     }
                     position: absolute;

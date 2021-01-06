@@ -26,6 +26,12 @@
   font-weight: 800;
 }
 
+@media (max-width: 650px) {
+  .date-info .left p {
+    font-size: 1.1rem;
+  }
+}
+
 .date-info .right {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -43,9 +49,22 @@
   cursor: pointer;
 }
 
+@media (max-width: 650px) {
+  .date-info .right .switch-button {
+    font-size: 1.1rem;
+    padding: .2rem .5rem;
+  }
+}
+
 .date-info .right .text {
   font-size: 1.7rem;
   font-weight: 900;
   margin: 0 1.3rem;
+}
+
+@media (max-width: 650px) {
+  .date-info .right .text {
+    font-size: 1.4rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */

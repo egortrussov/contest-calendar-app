@@ -5,12 +5,30 @@
   padding-top: 0;
 }
 
+@media (max-width: 650px) {
+  .heading {
+    font-size: 2rem;
+  }
+}
+
 .heading.md {
   font-size: 2rem;
 }
 
+@media (max-width: 650px) {
+  .heading.md {
+    font-size: 1.8rem;
+  }
+}
+
 .heading.sm {
   font-size: 1.7rem;
+}
+
+@media (max-width: 650px) {
+  .heading.sm {
+    font-size: 1.5rem;
+  }
 }
 
 .heading.xsm {

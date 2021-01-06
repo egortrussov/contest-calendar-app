@@ -56,6 +56,18 @@
   .app-container nav .nav-top .text {
     display: none !important;
   }
+  .app-container nav .nav-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: row !important;
+            flex-direction: row !important;
+  }
+  .app-container nav .nav-link {
+    width: 30px;
+  }
 }
 
 .app-container nav .toggle-view {
@@ -204,6 +216,7 @@
     text-align: center;
     width: auto;
     height: 100%;
+    padding: 0 25px !important;
   }
 }
 

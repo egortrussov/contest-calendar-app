@@ -1,3 +1,5 @@
+@import '../../../../GlobalCSS/config';
+
 .calendar-page {
 
     // &.has-pb {
@@ -21,6 +23,10 @@
     .left {
 
         p {
+            @include tablet-xsm {
+                font-size: 1.1rem;
+            }
+            
             font-size: 1.3rem;
             color: #777777;
             font-weight: 800;
@@ -32,6 +38,11 @@
         align-items: center;
 
         .switch-button {
+            @include tablet-xsm {
+                font-size: 1.1rem;
+                padding: .2rem .5rem;
+            }
+
             padding: .5rem .8rem;
             background-color: #d4d4d4;
             font-size: 1.3rem;
@@ -40,6 +51,10 @@
         }
 
         .text {
+            @include tablet-xsm {
+                font-size: 1.4rem;
+            }
+
             font-size: 1.7rem;
             font-weight: 900;
             margin: 0 1.3rem;

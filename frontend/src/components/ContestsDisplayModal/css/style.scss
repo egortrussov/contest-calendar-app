@@ -36,6 +36,11 @@
 }
 
 .display-modal {
+    @include tablet-xsm {
+        top: auto;
+        bottom: -5rem
+    }
+
     position: sticky;
     width: 100%;
     height: 50vh;
@@ -61,6 +66,10 @@
     }
 
     .content {
+        @include tablet-xsm {
+            padding-top: 1.2rem;
+        }
+
         position: relative;
         
         .handlers {

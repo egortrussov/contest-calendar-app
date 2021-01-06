@@ -32,7 +32,10 @@ export default class TableRow extends Component {
                             text = contest.createdBy.fullName;
 
                         if (name === 'subject') 
-                            text = contest.subject.name;
+                            if (contest.subject) 
+                                text = contest.subject.name;
+                            else 
+                                text = '-'
                         
                         if (name === 'date') 
                             text = formatDateShort(contest.date)
@@ -46,7 +49,7 @@ export default class TableRow extends Component {
 
                         return (
                             <Cell
-                                text={ text }
+                                text={ text || '-' }
                                 extraClassName={ extraClassName }
                             />
                         )

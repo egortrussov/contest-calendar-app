@@ -61,6 +61,13 @@
   overflow-x: hidden;
 }
 
+@media (max-width: 650px) {
+  .display-modal {
+    top: auto;
+    bottom: -5rem;
+  }
+}
+
 .display-modal.extended {
   height: 90vh;
 }
@@ -74,6 +81,12 @@
 
 .display-modal .content {
   position: relative;
+}
+
+@media (max-width: 650px) {
+  .display-modal .content {
+    padding-top: 1.2rem;
+  }
 }
 
 .display-modal .content .handlers {
